@@ -1,6 +1,7 @@
 <h1>Installation:</h1>
 <p>
-qmake install
+qmake
+make
 </p>
 <h1>About:</h1>
 <p>
