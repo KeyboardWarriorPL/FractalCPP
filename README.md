@@ -4,7 +4,7 @@ qmake install
 </p>
 <h1>About:</h1>
 <p>
-Easy touse tool for fractal generation.
+Simple tool for Julia Set fractal generation.
 Based on Qt4 Application.
-Offers any resolution fractal drawing with a preview.
+Allows previewing and saving generated image.
 </p>
