@@ -1,8 +1,8 @@
 #include "FComplex.h"
 
-FComplex::FComplex() : imag(0), real(0) {}
-FComplex::FComplex(double v) : imag(0), real(v) {}
-FComplex::FComplex(double r, double i, bool euler=false) {
+FComplex::FComplex() : real(0), imag(0) {}
+FComplex::FComplex(double v) : real(v), imag(0) {}
+FComplex::FComplex(double r, double i, bool euler) {
     set(r, i, euler);
 }
 FComplex::FComplex(const FComplex& z) {
@@ -14,7 +14,7 @@ FComplex::FComplex(const complex<double>& z) {
     imag = z.imag();
 }
 
-FComplex& FComplex::set(double r, double i, bool euler=false) {
+FComplex& FComplex::set(double r, double i, bool euler) {
     if (euler) {
         real = r * cos(i);
         imag = r * sin(i);
@@ -23,6 +23,7 @@ FComplex& FComplex::set(double r, double i, bool euler=false) {
         real = r;
         imag = i;
     }
+    return *this;
 }
 
 double FComplex::Real() const {
@@ -96,7 +97,7 @@ FComplex FComplex::power(const FComplex& z) const {
     return pwr;
 }
 
-string FComplex::ToString(bool euler=false) const {
+string FComplex::ToString(bool euler) const {
     if (euler) {
         string s = to_string(R());
         s.append("e^(i");

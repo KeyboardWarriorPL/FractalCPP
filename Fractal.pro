@@ -28,4 +28,4 @@ HEADERS += FComplex.h Polynomial.h
 FORMS += main.ui
 SOURCES += main.cpp FComplex.cpp Polynomial.cpp
 
-LIBS += -L/usr/local/lib -lmath
+LIBS += -L/usr/local/lib

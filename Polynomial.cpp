@@ -9,7 +9,7 @@ Polynomial::Polynomial(const Polynomial& p) : Polynomial() {
 Polynomial::Polynomial(vector<FComplex> v) : factors(v) {}
 Polynomial::Polynomial(const FComplex* a, size_t l) : factors({}) {
     factors.reserve(l);
-    for (size_t i = 0; i < l; i++) {
+    for (int i = 0; i < l; i++) {
         factors.push_back(a[i]);
     }
 }
@@ -39,7 +39,7 @@ void Polynomial::set(const FComplex& z, size_t degree) {
 
 FComplex Polynomial::calc(const FComplex& x) const {
     FComplex sum = 0;
-    for (size_t i = 0; i < factors.size(); i++) {
+    for (int i = 0; i < factors.size(); i++) {
         sum += factors.at(i) * x.power(i);
     }
     return sum;
@@ -48,7 +48,7 @@ FComplex Polynomial::operator()(const FComplex& x) const {
     return calc(x);
 }
 Polynomial& Polynomial::operator+=(const Polynomial& p) {
-    for (size_t i = 0; i < p.factors.size(); i++) {
+    for (int i = 0; i < p.factors.size(); i++) {
         if (factors.size() > i)
             factors.at(i) += p.factors.at(i);
         else
@@ -95,7 +95,7 @@ Polynomial& Polynomial::operator-=(const FComplex& v) {
 }
 Polynomial Polynomial::operator*(const FComplex& v) const {
     Polynomial mul{*this};
-    for (size_t i = 0; i < mul.factors.size(); i++)
+    for (int i = 0; i < mul.factors.size(); i++)
         mul.factors.at(i) *= v;
     return mul;
 }

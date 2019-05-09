@@ -38,7 +38,7 @@ DISTNAME      = Fractal1.0.0
 DISTDIR = /home/gbs/Documents/Agh/extraCPP/Fractal/.tmp/Fractal1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/home/gbs/anaconda3/lib
-LIBS          = $(SUBLIBS) -L/usr/local/lib -lmath -L/home/gbs/anaconda3/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/local/lib -L/home/gbs/anaconda3/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -51,8 +51,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
+		FComplex.cpp \
 		Polynomial.cpp 
 OBJECTS       = main.o \
+		FComplex.o \
 		Polynomial.o
 DIST          = ../../../../anaconda3/mkspecs/features/spec_pre.prf \
 		../../../../anaconda3/mkspecs/common/unix.conf \
@@ -231,7 +233,9 @@ DIST          = ../../../../anaconda3/mkspecs/features/spec_pre.prf \
 		../../../../anaconda3/mkspecs/features/exceptions.prf \
 		../../../../anaconda3/mkspecs/features/yacc.prf \
 		../../../../anaconda3/mkspecs/features/lex.prf \
-		Fractal.pro Polynomial.h main.cpp \
+		Fractal.pro FComplex.h \
+		Polynomial.h main.cpp \
+		FComplex.cpp \
 		Polynomial.cpp
 QMAKE_TARGET  = Fractal
 DESTDIR       = bin/
@@ -623,8 +627,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../anaconda3/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Polynomial.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp Polynomial.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents FComplex.h Polynomial.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp FComplex.cpp Polynomial.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents main.ui $(DISTDIR)/
 
 
@@ -783,10 +787,19 @@ main.o: main.cpp ../../../../anaconda3/include/qt/QtWidgets/QApplication \
 		../../../../anaconda3/include/qt/QtGui/qvector2d.h \
 		../../../../anaconda3/include/qt/QtGui/qtouchdevice.h \
 		../../../../anaconda3/include/qt/QtGui/qguiapplication.h \
-		../../../../anaconda3/include/qt/QtGui/qinputmethod.h
+		../../../../anaconda3/include/qt/QtGui/qinputmethod.h \
+		Julia.h \
+		Polynomial.h \
+		FComplex.h \
+		../../../../anaconda3/include/qt/QtGui/QColor \
+		../../../../anaconda3/include/qt/QtGui/QImage
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-Polynomial.o: Polynomial.cpp Polynomial.h
+FComplex.o: FComplex.cpp FComplex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FComplex.o FComplex.cpp
+
+Polynomial.o: Polynomial.cpp Polynomial.h \
+		FComplex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Polynomial.o Polynomial.cpp
 
 ####### Install
