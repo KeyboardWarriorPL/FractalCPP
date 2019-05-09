@@ -5,21 +5,19 @@
 
 using namespace std;
 
-/// A better implementation of complex number
+/// a better implementation of complex number
 class FComplex {
     double real, imag;
-    // euler input flag
-    bool euler;
 
     public:
     FComplex();
     FComplex(double);
-    FComplex(double, double, bool);
+    FComplex(double, double, bool euler=false);
     FComplex(const FComplex&);
     FComplex(const complex<double>&);
+    ~FComplex() = default;
 
-    void set(double, double);
-    void setEuler(bool);
+    FComplex& set(double, double, bool euler=false);
 
     double Real() const;
     double Imag() const;
@@ -38,7 +36,7 @@ class FComplex {
     FComplex operator*(const FComplex&) const;
     FComplex operator/(const FComplex&) const;
 
-    FComplex pow(const FComplex&) const;
+    FComplex power(const FComplex&) const;
 
-    string ToString() const;
+    string ToString(bool euler=false) const;
 };

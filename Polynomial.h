@@ -2,6 +2,7 @@
 #include "FComplex.h"
 #include <vector>
 #include <string>
+#include <regex>
 
 using namespace std;
 
@@ -19,19 +20,22 @@ class Polynomial {
     Polynomial(string);
     ~Polynomial();
 
-    FComplex calc(const FComplex) const;
-    FComplex operator()(const FComplex) const;
+    Polynomial& push_back(const FComplex&);
+    void set(const FComplex&, size_t degree);
+
+    FComplex calc(const FComplex&) const;
+    FComplex operator()(const FComplex&) const;
     Polynomial& operator+=(const Polynomial&);
     Polynomial& operator-=(const Polynomial&);
     Polynomial operator+(const Polynomial&) const;
     Polynomial operator-(const Polynomial&) const;
 
-    Polynomial& operator*=(const FComplex);
-    Polynomial& operator+=(const FComplex);
-    Polynomial& operator-=(const FComplex);
-    Polynomial operator*(const FComplex) const;
-    Polynomial operator+(const FComplex) const;
-    Polynomial operator-(const FComplex) const;
+    Polynomial& operator*=(const FComplex&);
+    Polynomial& operator+=(const FComplex&);
+    Polynomial& operator-=(const FComplex&);
+    Polynomial operator*(const FComplex&) const;
+    Polynomial operator+(const FComplex&) const;
+    Polynomial operator-(const FComplex&) const;
 
     string ToString() const;
 };

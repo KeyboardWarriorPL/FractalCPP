@@ -24,14 +24,27 @@ Polynomial::~Polynomial() {
     factors.clear();
 }
 
-FComplex Polynomial::calc(const FComplex x) const {
+Polynomial& Polynomial::push_back(const FComplex& z) {
+    factors.push_back(z);
+    return *this;
+}
+void Polynomial::set(const FComplex& z, size_t degree) {
+    if (degree >= factors.size()) {
+        factors.reserve(degree+1);
+        while (degree >= factors.size())
+            factors.push_back({});
+    }
+    factors.assign(degree, z);
+}
+
+FComplex Polynomial::calc(const FComplex& x) const {
     FComplex sum = 0;
     for (size_t i = 0; i < factors.size(); i++) {
-        sum += factors.at(i) * x.pow(i);
+        sum += factors.at(i) * x.power(i);
     }
     return sum;
 }
-FComplex Polynomial::operator()(const FComplex x) const {
+FComplex Polynomial::operator()(const FComplex& x) const {
     return calc(x);
 }
 Polynomial& Polynomial::operator+=(const Polynomial& p) {
@@ -60,33 +73,33 @@ Polynomial Polynomial::operator-(const Polynomial& p) const {
     return (*this) + (p * (-1));
 }
 
-Polynomial& Polynomial::operator*=(const FComplex v) {
+Polynomial& Polynomial::operator*=(const FComplex& v) {
     for (int i = 0; i < factors.size(); i++) {
         factors.at(i) *= v;
     }
     return *this;
 }
-Polynomial& Polynomial::operator+=(const FComplex v) {
+Polynomial& Polynomial::operator+=(const FComplex& v) {
     if (factors.size() > 0)
         factors.at(0) += v;
     else
         factors.push_back(v);
     return *this;
 }
-Polynomial& Polynomial::operator-=(const FComplex v) {
+Polynomial& Polynomial::operator-=(const FComplex& v) {
     if (factors.size() > 0)
         factors.at(0) -= v;
     else
         factors.push_back(v*(-1));
     return *this;
 }
-Polynomial Polynomial::operator*(const FComplex v) const {
+Polynomial Polynomial::operator*(const FComplex& v) const {
     Polynomial mul{*this};
     for (size_t i = 0; i < mul.factors.size(); i++)
         mul.factors.at(i) *= v;
     return mul;
 }
-Polynomial Polynomial::operator+(const FComplex v) const {
+Polynomial Polynomial::operator+(const FComplex& v) const {
     Polynomial sum{*this};
     if (sum.factors.size() > 0)
         sum.factors.at(0) += v;
@@ -94,7 +107,7 @@ Polynomial Polynomial::operator+(const FComplex v) const {
         sum.factors.push_back(v);
     return sum;
 }
-Polynomial Polynomial::operator-(const FComplex v) const {
+Polynomial Polynomial::operator-(const FComplex& v) const {
     return (*this) + (v*(-1));
 }
 
@@ -112,5 +125,5 @@ string Polynomial::ToString() const {
     return s;
 }
 void Polynomial::fromString(const string) {
-    // external lib? hell no!
+    // external lib? hell no! or regex maybe
 }
