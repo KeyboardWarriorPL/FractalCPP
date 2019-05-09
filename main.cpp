@@ -1,6 +1,8 @@
 #include <iostream>
 #include <QApplication>
-#include <QtGui>
+#include <QLabel>
+#include <QImage>
+#include <QColor>
 #include "Julia.h"
 
 int main(int argc, char **argv) {
@@ -12,7 +14,7 @@ int main(int argc, char **argv) {
     cout << "sad" << endl;
     j.paint(test, 2, FComplex{0.234, 0.84});
     cout << "sad" << endl;
-    QLabel l{};
+    QLabel l;
     cout << "sad" << endl;
     l.setPixmap(QPixmap::fromImage(test));
     cout << "sad" << endl;
