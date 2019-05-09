@@ -24,7 +24,7 @@ QColor Julia::process(int iters, const FComplex& start, const FComplex& c) const
 QColor Julia::getColor(double progress) const {
     if (progress >= 1)
         return QColor{0, 0, 0};
-    return QColor{0xffffff * (1.0 - progress)};
+    return QColor{(QRgb)(0xffffff * (1.0 - progress))};
 }
 QImage Julia::calc(int iterations, const FComplex& c) const {
     QImage plot{size, size, QImage::Format_RGB32};
@@ -32,7 +32,7 @@ QImage Julia::calc(int iterations, const FComplex& c) const {
     for (int x = 0; x < size; x++) {
         for (int y = 0; y < size; y++) {
             z.set(x, y);
-            plot.setColor(plot.pixelIndex(x, y), process(iterations, z, c));
+            plot.setColor(plot.pixelIndex(x, y), process(iterations, z, c).rgb());
         }
     }
     return plot;

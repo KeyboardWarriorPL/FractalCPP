@@ -52,10 +52,12 @@ OBJECTS_DIR   = ./
 
 SOURCES       = main.cpp \
 		FComplex.cpp \
-		Polynomial.cpp 
+		Polynomial.cpp \
+		Julia.cpp 
 OBJECTS       = main.o \
 		FComplex.o \
-		Polynomial.o
+		Polynomial.o \
+		Julia.o
 DIST          = ../../../../anaconda3/mkspecs/features/spec_pre.prf \
 		../../../../anaconda3/mkspecs/common/unix.conf \
 		../../../../anaconda3/mkspecs/common/linux.conf \
@@ -234,9 +236,11 @@ DIST          = ../../../../anaconda3/mkspecs/features/spec_pre.prf \
 		../../../../anaconda3/mkspecs/features/yacc.prf \
 		../../../../anaconda3/mkspecs/features/lex.prf \
 		Fractal.pro FComplex.h \
-		Polynomial.h main.cpp \
+		Polynomial.h \
+		Julia.h main.cpp \
 		FComplex.cpp \
-		Polynomial.cpp
+		Polynomial.cpp \
+		Julia.cpp
 QMAKE_TARGET  = Fractal
 DESTDIR       = bin/
 TARGET        = bin/Fractal
@@ -627,8 +631,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../anaconda3/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents FComplex.h Polynomial.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp FComplex.cpp Polynomial.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents FComplex.h Polynomial.h Julia.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp FComplex.cpp Polynomial.cpp Julia.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents main.ui $(DISTDIR)/
 
 
@@ -801,6 +805,82 @@ FComplex.o: FComplex.cpp FComplex.h
 Polynomial.o: Polynomial.cpp Polynomial.h \
 		FComplex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Polynomial.o Polynomial.cpp
+
+Julia.o: Julia.cpp Julia.h \
+		Polynomial.h \
+		FComplex.h \
+		../../../../anaconda3/include/qt/QtGui/QColor \
+		../../../../anaconda3/include/qt/QtGui/qcolor.h \
+		../../../../anaconda3/include/qt/QtGui/qtguiglobal.h \
+		../../../../anaconda3/include/qt/QtCore/qglobal.h \
+		../../../../anaconda3/include/qt/QtCore/qconfig-bootstrapped.h \
+		../../../../anaconda3/include/qt/QtCore/qconfig.h \
+		../../../../anaconda3/include/qt/QtCore/qtcore-config.h \
+		../../../../anaconda3/include/qt/QtCore/qsystemdetection.h \
+		../../../../anaconda3/include/qt/QtCore/qprocessordetection.h \
+		../../../../anaconda3/include/qt/QtCore/qcompilerdetection.h \
+		../../../../anaconda3/include/qt/QtCore/qtypeinfo.h \
+		../../../../anaconda3/include/qt/QtCore/qsysinfo.h \
+		../../../../anaconda3/include/qt/QtCore/qlogging.h \
+		../../../../anaconda3/include/qt/QtCore/qflags.h \
+		../../../../anaconda3/include/qt/QtCore/qatomic.h \
+		../../../../anaconda3/include/qt/QtCore/qbasicatomic.h \
+		../../../../anaconda3/include/qt/QtCore/qatomic_bootstrap.h \
+		../../../../anaconda3/include/qt/QtCore/qgenericatomic.h \
+		../../../../anaconda3/include/qt/QtCore/qatomic_cxx11.h \
+		../../../../anaconda3/include/qt/QtCore/qatomic_msvc.h \
+		../../../../anaconda3/include/qt/QtCore/qglobalstatic.h \
+		../../../../anaconda3/include/qt/QtCore/qmutex.h \
+		../../../../anaconda3/include/qt/QtCore/qnumeric.h \
+		../../../../anaconda3/include/qt/QtCore/qversiontagging.h \
+		../../../../anaconda3/include/qt/QtGui/qtgui-config.h \
+		../../../../anaconda3/include/qt/QtGui/qrgb.h \
+		../../../../anaconda3/include/qt/QtCore/qnamespace.h \
+		../../../../anaconda3/include/qt/QtCore/qstringlist.h \
+		../../../../anaconda3/include/qt/QtCore/qlist.h \
+		../../../../anaconda3/include/qt/QtCore/qalgorithms.h \
+		../../../../anaconda3/include/qt/QtCore/qiterator.h \
+		../../../../anaconda3/include/qt/QtCore/qrefcount.h \
+		../../../../anaconda3/include/qt/QtCore/qarraydata.h \
+		../../../../anaconda3/include/qt/QtCore/qhashfunctions.h \
+		../../../../anaconda3/include/qt/QtCore/qchar.h \
+		../../../../anaconda3/include/qt/QtCore/qpair.h \
+		../../../../anaconda3/include/qt/QtCore/qbytearraylist.h \
+		../../../../anaconda3/include/qt/QtCore/qbytearray.h \
+		../../../../anaconda3/include/qt/QtCore/qstring.h \
+		../../../../anaconda3/include/qt/QtCore/qstringbuilder.h \
+		../../../../anaconda3/include/qt/QtCore/qregexp.h \
+		../../../../anaconda3/include/qt/QtCore/qstringmatcher.h \
+		../../../../anaconda3/include/qt/QtGui/qrgba64.h \
+		../../../../anaconda3/include/qt/QtGui/QImage \
+		../../../../anaconda3/include/qt/QtGui/qimage.h \
+		../../../../anaconda3/include/qt/QtGui/qpaintdevice.h \
+		../../../../anaconda3/include/qt/QtGui/qwindowdefs.h \
+		../../../../anaconda3/include/qt/QtCore/qobjectdefs.h \
+		../../../../anaconda3/include/qt/QtCore/qobjectdefs_impl.h \
+		../../../../anaconda3/include/qt/QtGui/qwindowdefs_win.h \
+		../../../../anaconda3/include/qt/QtCore/qrect.h \
+		../../../../anaconda3/include/qt/QtCore/qmargins.h \
+		../../../../anaconda3/include/qt/QtCore/qsize.h \
+		../../../../anaconda3/include/qt/QtCore/qpoint.h \
+		../../../../anaconda3/include/qt/QtGui/qpixelformat.h \
+		../../../../anaconda3/include/qt/QtGui/qtransform.h \
+		../../../../anaconda3/include/qt/QtGui/qmatrix.h \
+		../../../../anaconda3/include/qt/QtGui/qpolygon.h \
+		../../../../anaconda3/include/qt/QtCore/qvector.h \
+		../../../../anaconda3/include/qt/QtGui/qregion.h \
+		../../../../anaconda3/include/qt/QtCore/qdatastream.h \
+		../../../../anaconda3/include/qt/QtCore/qscopedpointer.h \
+		../../../../anaconda3/include/qt/QtCore/qiodevice.h \
+		../../../../anaconda3/include/qt/QtCore/qobject.h \
+		../../../../anaconda3/include/qt/QtCore/qcoreevent.h \
+		../../../../anaconda3/include/qt/QtCore/qmetatype.h \
+		../../../../anaconda3/include/qt/QtCore/qvarlengtharray.h \
+		../../../../anaconda3/include/qt/QtCore/qcontainerfwd.h \
+		../../../../anaconda3/include/qt/QtCore/qobject_impl.h \
+		../../../../anaconda3/include/qt/QtCore/qline.h \
+		../../../../anaconda3/include/qt/QtGui/qpainterpath.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Julia.o Julia.cpp
 
 ####### Install
 

@@ -9,7 +9,7 @@ Polynomial::Polynomial(const Polynomial& p) : Polynomial() {
 Polynomial::Polynomial(vector<FComplex> v) : factors(v) {}
 Polynomial::Polynomial(const FComplex* a, size_t l) : factors({}) {
     factors.reserve(l);
-    for (int i = 0; i < l; i++) {
+    for (auto i = 0; i < l; i++) {
         factors.push_back(a[i]);
     }
 }
@@ -39,7 +39,7 @@ void Polynomial::set(const FComplex& z, size_t degree) {
 
 FComplex Polynomial::calc(const FComplex& x) const {
     FComplex sum = 0;
-    for (int i = 0; i < factors.size(); i++) {
+    for (auto i = 0; i < factors.size(); i++) {
         sum += factors.at(i) * x.power(i);
     }
     return sum;
@@ -48,7 +48,7 @@ FComplex Polynomial::operator()(const FComplex& x) const {
     return calc(x);
 }
 Polynomial& Polynomial::operator+=(const Polynomial& p) {
-    for (int i = 0; i < p.factors.size(); i++) {
+    for (auto i = 0; i < p.factors.size(); i++) {
         if (factors.size() > i)
             factors.at(i) += p.factors.at(i);
         else
@@ -61,7 +61,7 @@ Polynomial& Polynomial::operator-=(const Polynomial& p) {
 }
 Polynomial Polynomial::operator+(const Polynomial& p) const {
     Polynomial sum{*this};
-    for (int i = 0; i < p.factors.size(); i++) {
+    for (auto i = 0; i < p.factors.size(); i++) {
         if (sum.factors.size() > i)
             sum.factors.at(i) += p.factors.at(i);
         else
@@ -74,7 +74,7 @@ Polynomial Polynomial::operator-(const Polynomial& p) const {
 }
 
 Polynomial& Polynomial::operator*=(const FComplex& v) {
-    for (int i = 0; i < factors.size(); i++) {
+    for (auto i = 0; i < factors.size(); i++) {
         factors.at(i) *= v;
     }
     return *this;
@@ -95,7 +95,7 @@ Polynomial& Polynomial::operator-=(const FComplex& v) {
 }
 Polynomial Polynomial::operator*(const FComplex& v) const {
     Polynomial mul{*this};
-    for (int i = 0; i < mul.factors.size(); i++)
+    for (auto i = 0; i < mul.factors.size(); i++)
         mul.factors.at(i) *= v;
     return mul;
 }
@@ -115,7 +115,7 @@ string Polynomial::ToString() const {
     if (factors.empty())
         return "";
     string s;
-    for (int i = factors.size()-1; i > 0; i++) {
+    for (auto i = factors.size()-1; i > 0; i++) {
         s.append(factors.at(i).ToString());
         s.append("z^");
         s.append(to_string(i));
