@@ -51,9 +51,9 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		Color.cpp 
+		Polynomial.cpp 
 OBJECTS       = main.o \
-		Color.o
+		Polynomial.o
 DIST          = ../../../../anaconda3/mkspecs/features/spec_pre.prf \
 		../../../../anaconda3/mkspecs/common/unix.conf \
 		../../../../anaconda3/mkspecs/common/linux.conf \
@@ -231,8 +231,8 @@ DIST          = ../../../../anaconda3/mkspecs/features/spec_pre.prf \
 		../../../../anaconda3/mkspecs/features/exceptions.prf \
 		../../../../anaconda3/mkspecs/features/yacc.prf \
 		../../../../anaconda3/mkspecs/features/lex.prf \
-		Fractal.pro Color.h main.cpp \
-		Color.cpp
+		Fractal.pro Polynomial.h main.cpp \
+		Polynomial.cpp
 QMAKE_TARGET  = Fractal
 DESTDIR       = bin/
 TARGET        = bin/Fractal
@@ -623,8 +623,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../anaconda3/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Color.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp Color.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Polynomial.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp Polynomial.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents main.ui $(DISTDIR)/
 
 
@@ -786,51 +786,8 @@ main.o: main.cpp ../../../../anaconda3/include/qt/QtWidgets/QApplication \
 		../../../../anaconda3/include/qt/QtGui/qinputmethod.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-Color.o: Color.cpp Color.h \
-		../../../../anaconda3/include/qt/QtGui/QColor \
-		../../../../anaconda3/include/qt/QtGui/qcolor.h \
-		../../../../anaconda3/include/qt/QtGui/qtguiglobal.h \
-		../../../../anaconda3/include/qt/QtCore/qglobal.h \
-		../../../../anaconda3/include/qt/QtCore/qconfig-bootstrapped.h \
-		../../../../anaconda3/include/qt/QtCore/qconfig.h \
-		../../../../anaconda3/include/qt/QtCore/qtcore-config.h \
-		../../../../anaconda3/include/qt/QtCore/qsystemdetection.h \
-		../../../../anaconda3/include/qt/QtCore/qprocessordetection.h \
-		../../../../anaconda3/include/qt/QtCore/qcompilerdetection.h \
-		../../../../anaconda3/include/qt/QtCore/qtypeinfo.h \
-		../../../../anaconda3/include/qt/QtCore/qsysinfo.h \
-		../../../../anaconda3/include/qt/QtCore/qlogging.h \
-		../../../../anaconda3/include/qt/QtCore/qflags.h \
-		../../../../anaconda3/include/qt/QtCore/qatomic.h \
-		../../../../anaconda3/include/qt/QtCore/qbasicatomic.h \
-		../../../../anaconda3/include/qt/QtCore/qatomic_bootstrap.h \
-		../../../../anaconda3/include/qt/QtCore/qgenericatomic.h \
-		../../../../anaconda3/include/qt/QtCore/qatomic_cxx11.h \
-		../../../../anaconda3/include/qt/QtCore/qatomic_msvc.h \
-		../../../../anaconda3/include/qt/QtCore/qglobalstatic.h \
-		../../../../anaconda3/include/qt/QtCore/qmutex.h \
-		../../../../anaconda3/include/qt/QtCore/qnumeric.h \
-		../../../../anaconda3/include/qt/QtCore/qversiontagging.h \
-		../../../../anaconda3/include/qt/QtGui/qtgui-config.h \
-		../../../../anaconda3/include/qt/QtGui/qrgb.h \
-		../../../../anaconda3/include/qt/QtCore/qnamespace.h \
-		../../../../anaconda3/include/qt/QtCore/qstringlist.h \
-		../../../../anaconda3/include/qt/QtCore/qlist.h \
-		../../../../anaconda3/include/qt/QtCore/qalgorithms.h \
-		../../../../anaconda3/include/qt/QtCore/qiterator.h \
-		../../../../anaconda3/include/qt/QtCore/qrefcount.h \
-		../../../../anaconda3/include/qt/QtCore/qarraydata.h \
-		../../../../anaconda3/include/qt/QtCore/qhashfunctions.h \
-		../../../../anaconda3/include/qt/QtCore/qchar.h \
-		../../../../anaconda3/include/qt/QtCore/qpair.h \
-		../../../../anaconda3/include/qt/QtCore/qbytearraylist.h \
-		../../../../anaconda3/include/qt/QtCore/qbytearray.h \
-		../../../../anaconda3/include/qt/QtCore/qstring.h \
-		../../../../anaconda3/include/qt/QtCore/qstringbuilder.h \
-		../../../../anaconda3/include/qt/QtCore/qregexp.h \
-		../../../../anaconda3/include/qt/QtCore/qstringmatcher.h \
-		../../../../anaconda3/include/qt/QtGui/qrgba64.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Color.o Color.cpp
+Polynomial.o: Polynomial.cpp Polynomial.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Polynomial.o Polynomial.cpp
 
 ####### Install
 

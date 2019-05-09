@@ -1,39 +1,37 @@
 #pragma once
-#include <complex>
+#include "FComplex.h"
 #include <vector>
 #include <string>
-
-typedef complex<double> CxDouble;
 
 using namespace std;
 
 class Polynomial {
-    vector<CxDouble> factors;
+    vector<FComplex> factors;
 
     void fromString(const string);
-    string complexStr(const CxDouble) const;
 
     public:
     Polynomial();
     Polynomial(const Polynomial&);
-    Polynomial(vector<CxDouble>);
-    Polynomial(const CxDouble*);
+    Polynomial(vector<FComplex>);
+    Polynomial(const FComplex*, size_t);
+    Polynomial(const FComplex);
     Polynomial(string);
     ~Polynomial();
 
-    CxDouble calc(const CxDouble) const;
-    CxDouble operator()(const CxDouble) const;
+    FComplex calc(const FComplex) const;
+    FComplex operator()(const FComplex) const;
     Polynomial& operator+=(const Polynomial&);
     Polynomial& operator-=(const Polynomial&);
     Polynomial operator+(const Polynomial&) const;
     Polynomial operator-(const Polynomial&) const;
 
-    Polynomial& operator*=(const CxDouble);
-    Polynomial& operator+=(const CxDouble);
-    Polynomial& operator-=(const CxDouble);
-    Polynomial operator*(const CxDouble) const;
-    Polynomial operator+(const CxDouble) const;
-    Polynomial operator-(const CxDouble) const;
+    Polynomial& operator*=(const FComplex);
+    Polynomial& operator+=(const FComplex);
+    Polynomial& operator-=(const FComplex);
+    Polynomial operator*(const FComplex) const;
+    Polynomial operator+(const FComplex) const;
+    Polynomial operator-(const FComplex) const;
 
     string ToString() const;
 };

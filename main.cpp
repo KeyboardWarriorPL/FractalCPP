@@ -1,10 +1,10 @@
 #include <iostream>
-#include <QtGui/QtGui>
+#include <QtGui/QApplication>
 
 int main(int argc, char **argv) {
-    QApplication app(argc, argv);
-    QWidget window;
-    window.setWindowFilePath("main.ui");
-    window.show();
+    QApplication app{argc, argv};
+    // QWidget window;
+    // window.setWindowFilePath("main.ui");
+    // window.show();
     return app.exec();
 }
