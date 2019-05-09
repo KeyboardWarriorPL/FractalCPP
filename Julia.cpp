@@ -1,8 +1,8 @@
 #include "Julia.h"
 
-Julia::Julia() : Julia(128, 1) {}
-Julia::Julia(int imgsize, double zoom) : Julia(imgsize, zoom, Polynomial{}, Polynomial{}) {}
-Julia::Julia(int imgsize, double zoom, const Polynomial& numerator, const Polynomial& denominator) : size(imgsize), scale(zoom), threshold(100), f(Polynomial{numerator}), g(Polynomial{denominator}) {}
+Julia::Julia() : Julia(1) {}
+Julia::Julia(double zoom) : Julia(zoom, Polynomial{}, Polynomial{}) {}
+Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), threshold(100), f(Polynomial{numerator}), g(Polynomial{denominator}) {}
 
 void Julia::set(const Polynomial& numerator, const Polynomial& denominator) {
     f = numerator;
@@ -26,13 +26,12 @@ QColor Julia::getColor(double progress) const {
         return QColor{0, 0, 0};
     return QColor{(QRgb)(0xffffff * (1.0 - progress))};
 }
-QImage Julia::calc(int iterations, const FComplex& c) const {
-    QImage plot{size, size, QImage::Format_RGB32};
+QImage& Julia::paint(QImage& plot, int iterations, const FComplex& c) const {
     FComplex z;
-    for (int x = 0; x < size; x++) {
-        for (int y = 0; y < size; y++) {
-            z.set(x, y);
-            plot.setColor(plot.pixelIndex(x, y), process(iterations, z, c).rgb());
+    for (int x = 0; x < plot.width(); x++) {
+        for (int y = 0; y < plot.height(); y++) {
+            z.set((double)x/plot.width(), (double)y/plot.height());
+            plot.setPixel(x, y, process(iterations, z, c).rgb());
         }
     }
     return plot;

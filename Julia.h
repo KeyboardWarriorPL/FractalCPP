@@ -5,7 +5,6 @@
 #include <QImage>
 
 class Julia {
-    int size;
     double scale, threshold;
     Polynomial f, g;
 
@@ -14,12 +13,12 @@ class Julia {
 
     public:
     Julia();
-    Julia(int, double);
-    Julia(int, double, const Polynomial&, const Polynomial&);
+    Julia(double);
+    Julia(double, const Polynomial&, const Polynomial&);
     Julia(const Julia&) = delete;
     ~Julia() = default;
 
     void set(const Polynomial&, const Polynomial&);
     void rescale(double);
-    QImage calc(int, const FComplex&) const;
+    QImage& paint(QImage&, int, const FComplex&) const;
 };

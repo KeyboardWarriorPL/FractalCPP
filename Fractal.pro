@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # Input
 HEADERS += FComplex.h Polynomial.h Julia.h
-FORMS += main.ui
+FORMS += front.ui
 SOURCES += main.cpp FComplex.cpp Polynomial.cpp Julia.cpp
 
 LIBS += -L/usr/local/lib
