@@ -7,10 +7,10 @@ Polynomial::Polynomial(const Polynomial& p) : Polynomial() {
         factors.push_back(i);
 }
 Polynomial::Polynomial(vector<FComplex> v) : factors(v) {}
-Polynomial::Polynomial(const FComplex* a, size_t l) : factors({}) {
-    factors.reserve(l);
-    for (auto i = 0; i < l; i++) {
-        factors.push_back(a[i]);
+Polynomial::Polynomial(const initializer_list<double> a) : factors({}) {
+    factors.reserve(a.size());
+    for (auto i : a) {
+        factors.push_back(i);
     }
 }
 Polynomial::Polynomial(const FComplex a) : factors({}) {

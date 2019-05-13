@@ -15,7 +15,7 @@ class Polynomial {
     Polynomial();
     Polynomial(const Polynomial&);
     Polynomial(vector<FComplex>);
-    Polynomial(const FComplex*, size_t);
+    Polynomial(const initializer_list<double>);
     Polynomial(const FComplex);
     Polynomial(string);
     ~Polynomial();

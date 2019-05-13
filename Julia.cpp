@@ -12,7 +12,7 @@ void Julia::rescale(double zoom) {
     scale = zoom;
 }
 
-QColor Julia::process(int iters, const FComplex& start, const FComplex& c) const {
+int Julia::process(int iters, const FComplex& start, const FComplex& c) const {
     FComplex n{start};
     for (int i = 0; i < iters; i++) {
         n = f.calc(n) / g.calc(n) + c;
@@ -21,17 +21,19 @@ QColor Julia::process(int iters, const FComplex& start, const FComplex& c) const
     }
     return getColor(1);
 }
-QColor Julia::getColor(double progress) const {
+int Julia::getColor(double progress) const {
     if (progress >= 1)
-        return QColor{0, 0, 0};
-    return QColor{(QRgb)(0xffffff * (1.0 - progress))};
+        return 0;
+    return (0xffffff * (1.0 - progress));
 }
-QImage& Julia::paint(QImage& plot, int iterations, const FComplex& c) const {
+vector<int> Julia::paint(int width, int height, int iterations, const FComplex& c) const {
+    vector<int> plot;
     FComplex z;
-    for (int x = 0; x < plot.width(); x++) {
-        for (int y = 0; y < plot.height(); y++) {
-            z.set((double)x/plot.width(), (double)y/plot.height());
-            plot.setPixel(x, y, process(iterations, z, c).rgb());
+    plot.reserve(width*height);
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            z.set((double)x/width, (double)y/height);
+            plot.push_back(process(iterations, z, c));
         }
     }
     return plot;

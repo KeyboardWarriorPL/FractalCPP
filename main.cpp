@@ -1,23 +1,22 @@
 #include <iostream>
-#include <QApplication>
-#include <QLabel>
-#include <QImage>
-#include <QColor>
+#if __has_include(<QApplication>)
+#include <QtGui>
+#else
+#warning "Using Qt4 direct including (not recommended)"
+#include <QtGui/QApplication>
+#include <QtGui/QtGui>
+#endif
 #include "Julia.h"
+#include "ui_front.h"
 
 int main(int argc, char **argv) {
+    //Julia j{1, Polynomial{{2,0}}, Polynomial{1}};
+    //j.paint(128,128, 2, 0.56);
     QApplication app{argc, argv};
-    Julia j;
-    j.set(Polynomial{new FComplex[2] {0, 1}, 2}, Polynomial{1});
-    QImage test{128, 128, QImage::Format_RGB32};
-    test.fill(QColor{255,255,255}.rgb());
-    cout << "sad" << endl;
-    j.paint(test, 2, FComplex{0.234, 0.84});
-    cout << "sad" << endl;
+    QImage test{128,128, QImage::Format_RGB32};
+    test.fill(qRgb(23,45,177));
     QLabel l;
-    cout << "sad" << endl;
     l.setPixmap(QPixmap::fromImage(test));
-    cout << "sad" << endl;
     l.show();
     return app.exec();
 }
