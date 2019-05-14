@@ -13,7 +13,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += qt
 
 # Input
-HEADERS += FComplex.h Polynomial.h Julia.h
+HEADERS += FComplex.h Polynomial.h Julia.h FrontForm.h
 FORMS += front.ui
 SOURCES += main.cpp FComplex.cpp Polynomial.cpp Julia.cpp
 

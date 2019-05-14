@@ -7,7 +7,7 @@
 #include <QtGui/QtGui>
 #endif
 #include "Julia.h"
-#include "ui_front.h"
+#include "FrontForm.h"
 
 int main(int argc, char **argv) {
     QApplication app{argc, argv};
@@ -16,9 +16,8 @@ int main(int argc, char **argv) {
     // QLabel l;
     // l.setPixmap(QPixmap::fromImage(test));
     // l.show();
-    Ui::Main form;
-    QMainWindow* window = new QMainWindow;
-    form.setupUi(window);
-    window->show();
+    QMainWindow *window = new QMainWindow;
+    FrontForm form{window};
+    form.show();
     return app.exec();
 }
