@@ -9,9 +9,8 @@ Polynomial::Polynomial(const Polynomial& p) : Polynomial() {
 Polynomial::Polynomial(vector<FComplex> *v) : factors(v) {}
 Polynomial::Polynomial(const initializer_list<FComplex> a) : factors(new vector<FComplex>{}) {
     factors->reserve(a.size());
-    for (auto i : a) {
+    for (auto i : a)
         factors->push_back(i);
-    }
 }
 Polynomial::Polynomial(const string& s) {
     fromString(s);
@@ -106,6 +105,15 @@ Polynomial Polynomial::operator+(const FComplex& v) const {
 }
 Polynomial Polynomial::operator-(const FComplex& v) const {
     return (*this) + (v*(-1));
+}
+
+Polynomial& Polynomial::operator=(const Polynomial& p) {
+    delete factors;
+    factors = new vector<FComplex>;
+    factors->reserve(p.factors->size());
+    for (auto i : *p.factors)
+        factors->push_back(i);
+    return *this;
 }
 
 string Polynomial::ToString() const {

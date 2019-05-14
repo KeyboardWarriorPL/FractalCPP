@@ -17,6 +17,7 @@ class Julia {
     Julia(const Julia&) = delete;
     ~Julia() = default;
 
+    string ToString() const;
     void set(const Polynomial&, const Polynomial&);
     void rescale(double);
     QImage& paint(QImage&, int, const FComplex&) const;

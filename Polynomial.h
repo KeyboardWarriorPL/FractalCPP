@@ -36,5 +36,7 @@ class Polynomial {
     Polynomial operator+(const FComplex&) const;
     Polynomial operator-(const FComplex&) const;
 
+    Polynomial& operator=(const Polynomial&);
+
     string ToString() const;
 };

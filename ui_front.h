@@ -51,6 +51,7 @@ public:
     QSlider *fiSlider;
     QLabel *label_5;
     QDoubleSpinBox *rSpin;
+    QLabel *infoLabel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -108,7 +109,7 @@ public:
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setValue(100);
 
-        gridLayout->addWidget(progressBar, 13, 0, 1, 1);
+        gridLayout->addWidget(progressBar, 14, 0, 1, 1);
 
         genButton = new QPushButton(centralwidget);
         genButton->setObjectName(QString::fromUtf8("genButton"));
@@ -123,7 +124,7 @@ public:
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
 
-        gridLayout->addWidget(graphicsView, 0, 1, 14, 2);
+        gridLayout->addWidget(graphicsView, 0, 1, 15, 2);
 
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -157,6 +158,11 @@ public:
 
         gridLayout->addWidget(rSpin, 11, 0, 1, 1);
 
+        infoLabel = new QLabel(centralwidget);
+        infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
+
+        gridLayout->addWidget(infoLabel, 13, 0, 1, 1);
+
         gridLayout->setColumnStretch(0, 1);
         gridLayout->setColumnStretch(1, 3);
 
@@ -186,6 +192,7 @@ public:
         label_3->setText(QApplication::translate("Main", "Zoom:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Main", "Iterations:", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("Main", "Constant R:", 0, QApplication::UnicodeUTF8));
+        infoLabel->setText(QApplication::translate("Main", "Click generate", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -1,12 +1,18 @@
 #include "Julia.h"
 
 Julia::Julia() : Julia(1) {}
-Julia::Julia(double zoom) : Julia(zoom, Polynomial{}, Polynomial{FComplex{1}}) {}
+Julia::Julia(double zoom) : Julia(zoom, Polynomial(), Polynomial({1})) {}
 Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), threshold(100), f(numerator), g(denominator) {}
 
+string Julia::ToString() const {
+    string s = f.ToString();
+    s.append(" / ");
+    s.append(g.ToString());
+    return s;
+}
 void Julia::set(const Polynomial& numerator, const Polynomial& denominator) {
-    f = Polynomial{numerator};
-    g = Polynomial{denominator};
+    f = numerator;
+    g = denominator;
 }
 void Julia::rescale(double zoom) {
     scale = zoom;
@@ -31,7 +37,7 @@ QImage& Julia::paint(QImage& plot, int iterations, const FComplex& c) const {
     FComplex z;
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            z.set(x/(width*scale), y/(height*scale));
+            z.set(((double)x / width - 0.5) * 2.0 / scale, ((double)y / height - 0.5) * 2.0 / scale);
             plot.setPixel(x, y, process(iterations, z, c));
         }
     }
