@@ -13,14 +13,17 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QDoubleSpinBox>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHeaderView>
+#include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QProgressBar>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpacerItem>
+#include <QtGui/QSpinBox>
 #include <QtGui/QStatusBar>
 #include <QtGui/QWidget>
 
@@ -30,14 +33,19 @@ class Ui_Main
 {
 public:
     QWidget *centralwidget;
-    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
-    QSpacerItem *horizontalSpacer;
-    QGraphicsView *graphicsView;
+    QDoubleSpinBox *colorSpin;
+    QDoubleSpinBox *zoomSpin;
+    QLabel *label;
+    QPushButton *savButton;
     QSpacerItem *verticalSpacer;
     QProgressBar *progressBar;
-    QPushButton *savButton;
     QPushButton *genButton;
+    QLabel *label_3;
+    QGraphicsView *graphicsView;
+    QLabel *label_2;
+    QSpinBox *iterSpin;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -48,44 +56,81 @@ public:
         Main->resize(800, 600);
         centralwidget = new QWidget(Main);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        gridLayoutWidget = new QWidget(centralwidget);
-        gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(6, 9, 781, 531));
-        gridLayout = new QGridLayout(gridLayoutWidget);
+        gridLayout_2 = new QGridLayout(centralwidget);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalSpacer = new QSpacerItem(20, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        colorSpin = new QDoubleSpinBox(centralwidget);
+        colorSpin->setObjectName(QString::fromUtf8("colorSpin"));
+        colorSpin->setDecimals(4);
+        colorSpin->setMaximum(1);
+        colorSpin->setSingleStep(0.1);
+        colorSpin->setValue(0.5);
 
-        gridLayout->addItem(horizontalSpacer, 2, 1, 1, 1);
+        gridLayout->addWidget(colorSpin, 5, 0, 1, 1);
 
-        graphicsView = new QGraphicsView(gridLayoutWidget);
-        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        zoomSpin = new QDoubleSpinBox(centralwidget);
+        zoomSpin->setObjectName(QString::fromUtf8("zoomSpin"));
+        zoomSpin->setDecimals(4);
+        zoomSpin->setMinimum(0.0001);
+        zoomSpin->setMaximum(1000);
 
-        gridLayout->addWidget(graphicsView, 0, 2, 4, 2);
+        gridLayout->addWidget(zoomSpin, 7, 0, 1, 1);
 
-        verticalSpacer = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout->addItem(verticalSpacer, 2, 0, 1, 1);
+        gridLayout->addWidget(label, 4, 0, 1, 1);
 
-        progressBar = new QProgressBar(gridLayoutWidget);
+        savButton = new QPushButton(centralwidget);
+        savButton->setObjectName(QString::fromUtf8("savButton"));
+
+        gridLayout->addWidget(savButton, 0, 0, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 100, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+
+        gridLayout->addItem(verticalSpacer, 8, 0, 1, 1);
+
+        progressBar = new QProgressBar(centralwidget);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setValue(24);
 
-        gridLayout->addWidget(progressBar, 3, 0, 1, 1);
+        gridLayout->addWidget(progressBar, 9, 0, 1, 1);
 
-        savButton = new QPushButton(gridLayoutWidget);
-        savButton->setObjectName(QString::fromUtf8("savButton"));
-
-        gridLayout->addWidget(savButton, 1, 0, 1, 1);
-
-        genButton = new QPushButton(gridLayoutWidget);
+        genButton = new QPushButton(centralwidget);
         genButton->setObjectName(QString::fromUtf8("genButton"));
 
-        gridLayout->addWidget(genButton, 0, 0, 1, 1);
+        gridLayout->addWidget(genButton, 1, 0, 1, 1);
+
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout->addWidget(label_3, 6, 0, 1, 1);
+
+        graphicsView = new QGraphicsView(centralwidget);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+
+        gridLayout->addWidget(graphicsView, 0, 1, 10, 2);
+
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout->addWidget(label_2, 2, 0, 1, 1);
+
+        iterSpin = new QSpinBox(centralwidget);
+        iterSpin->setObjectName(QString::fromUtf8("iterSpin"));
+        iterSpin->setMinimum(1);
+        iterSpin->setMaximum(1000000);
+        iterSpin->setValue(1000);
+
+        gridLayout->addWidget(iterSpin, 3, 0, 1, 1);
 
         gridLayout->setColumnStretch(0, 1);
-        gridLayout->setColumnStretch(2, 4);
+        gridLayout->setColumnStretch(1, 3);
+
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
+
         Main->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Main);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -103,8 +148,11 @@ public:
     void retranslateUi(QMainWindow *Main)
     {
         Main->setWindowTitle(QApplication::translate("Main", "Fractal Gen", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("Main", "Color shift:", 0, QApplication::UnicodeUTF8));
         savButton->setText(QApplication::translate("Main", "Save", 0, QApplication::UnicodeUTF8));
         genButton->setText(QApplication::translate("Main", "Generate", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("Main", "Zoom:", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("Main", "Iterations:", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

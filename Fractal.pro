@@ -15,7 +15,7 @@ CONFIG += qt
 # Input
 HEADERS += FComplex.h Polynomial.h Julia.h FrontForm.h
 FORMS += front.ui
-SOURCES += main.cpp FComplex.cpp Polynomial.cpp Julia.cpp
+SOURCES += main.cpp FComplex.cpp Polynomial.cpp Julia.cpp FrontForm.cpp
 
 LIBS += -L/usr/local/lib
 

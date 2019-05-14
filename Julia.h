@@ -1,7 +1,7 @@
 #pragma once
 #include "Polynomial.h"
 #include "FComplex.h"
-#include <vector>
+#include <QtGui/QImage>
 
 class Julia {
     double scale, threshold;
@@ -19,5 +19,5 @@ class Julia {
 
     void set(const Polynomial&, const Polynomial&);
     void rescale(double);
-    vector<int> paint(int, int, int, const FComplex&) const;
+    QImage& paint(QImage&, int, const FComplex&) const;
 };

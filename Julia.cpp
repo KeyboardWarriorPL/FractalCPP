@@ -24,16 +24,15 @@ int Julia::process(int iters, const FComplex& start, const FComplex& c) const {
 int Julia::getColor(double progress) const {
     if (progress >= 1)
         return 0;
-    return (0xffffff * (1.0 - progress));
+    return (0xffffff * (1.0 - progress)); // + 0xff000000;
 }
-vector<int> Julia::paint(int width, int height, int iterations, const FComplex& c) const {
-    vector<int> plot;
+QImage& Julia::paint(QImage& plot, int iterations, const FComplex& c) const {
+    int width = plot.width(), height = plot.height();
     FComplex z;
-    plot.reserve(width*height);
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             z.set((double)x/width, (double)y/height);
-            plot.push_back(process(iterations, z, c));
+            plot.setPixel(x, y, process(iterations, z, c));
         }
     }
     return plot;
