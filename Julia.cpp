@@ -29,9 +29,12 @@ int Julia::getColor(double progress) const {
 QImage& Julia::paint(QImage& plot, int iterations, const FComplex& c) const {
     int width = plot.width(), height = plot.height();
     FComplex z;
+    cout << "sup" << endl;
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
+            cout << "hey" << endl;
             z.set((double)x/width, (double)y/height);
+            cout << "hello" << endl;
             plot.setPixel(x, y, process(iterations, z, c));
         }
     }

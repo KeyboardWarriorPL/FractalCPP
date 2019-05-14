@@ -6,6 +6,7 @@
 #else
 #include <QtGui/QImage>
 #endif
+#include <iostream>
 
 class Julia {
     double scale, threshold;
