@@ -1,8 +1,8 @@
 #include "Julia.h"
 
 Julia::Julia() : Julia(1) {}
-Julia::Julia(double zoom) : Julia(zoom, Polynomial{}, Polynomial{}) {}
-Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), threshold(100), f(Polynomial{numerator}), g(Polynomial{denominator}) {}
+Julia::Julia(double zoom) : Julia(zoom, Polynomial{}, Polynomial{FComplex{1}}) {}
+Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), threshold(100), f(numerator), g(denominator) {}
 
 void Julia::set(const Polynomial& numerator, const Polynomial& denominator) {
     f = numerator;

@@ -15,4 +15,5 @@ class FrontForm : public QMainWindow {
     private:
     Ui::Main form;
     QGraphicsScene *scene;
+    Julia *jgen;
 };

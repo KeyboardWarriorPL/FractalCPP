@@ -7,16 +7,16 @@
 using namespace std;
 
 class Polynomial {
-    vector<FComplex> factors;
+    vector<FComplex> *factors;
 
     void fromString(const string);
 
     public:
     Polynomial();
     Polynomial(const Polynomial&);
-    Polynomial(vector<FComplex>);
+    Polynomial(vector<FComplex>*);
     Polynomial(const initializer_list<double>);
-    Polynomial(const FComplex);
+    Polynomial(const FComplex&);
     Polynomial(string);
     ~Polynomial();
 
