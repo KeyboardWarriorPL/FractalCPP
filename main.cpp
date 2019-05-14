@@ -10,13 +10,15 @@
 #include "ui_front.h"
 
 int main(int argc, char **argv) {
-    //Julia j{1, Polynomial{{2,0}}, Polynomial{1}};
-    //j.paint(128,128, 2, 0.56);
     QApplication app{argc, argv};
-    QImage test{128,128, QImage::Format_RGB32};
-    test.fill(qRgb(23,45,177));
-    QLabel l;
-    l.setPixmap(QPixmap::fromImage(test));
-    l.show();
+    // QImage test{128,128, QImage::Format_RGB32};
+    // test.fill(qRgb(23,45,177));
+    // QLabel l;
+    // l.setPixmap(QPixmap::fromImage(test));
+    // l.show();
+    Ui::Main form;
+    QMainWindow* window = new QMainWindow;
+    form.setupUi(window);
+    window->show();
     return app.exec();
 }
