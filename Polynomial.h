@@ -1,23 +1,24 @@
 #pragma once
 #include "FComplex.h"
-#include <vector>
-#include <string>
-#include <regex>
+#if __has_include(<QApplication>)
+#include <QVector>
+#include <QString>
+#else
+#include <QtCore/QVector>
+#include <QtCore/QString>
+#endif
 
 using namespace std;
 
 class Polynomial {
-    vector<FComplex> factors;
-
-    void fromString(const string);
+    QVector<FComplex> factors;
 
     public:
     Polynomial();
     Polynomial(const Polynomial&);
-    Polynomial(vector<FComplex>);
+    Polynomial(QVector<FComplex>);
     Polynomial(const initializer_list<double>);
     Polynomial(const FComplex);
-    Polynomial(string);
     ~Polynomial();
 
     Polynomial& push_back(const FComplex&);
@@ -37,5 +38,5 @@ class Polynomial {
     Polynomial operator+(const FComplex&) const;
     Polynomial operator-(const FComplex&) const;
 
-    string ToString() const;
+    QString ToString() const;
 };

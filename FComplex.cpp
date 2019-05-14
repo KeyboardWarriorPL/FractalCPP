@@ -9,10 +9,10 @@ FComplex::FComplex(const FComplex& z) {
     real = z.real;
     imag = z.imag;
 }
-FComplex::FComplex(const complex<double>& z) {
-    real = z.real();
-    imag = z.imag();
-}
+// FComplex::FComplex(const complex<double>& z) {
+//     real = z.real();
+//     imag = z.imag();
+// }
 
 FComplex& FComplex::set(double r, double i, bool euler) {
     if (euler) {
@@ -97,20 +97,20 @@ FComplex FComplex::power(const FComplex& z) const {
     return pwr;
 }
 
-string FComplex::ToString(bool euler) const {
+QString FComplex::ToString(bool euler) const {
     if (euler) {
-        string s = to_string(R());
+        QString s = QString{to_string(R()).data()};
         s.append("e^(i");
-        s.append(to_string(Fi()));
+        s.append(QString{to_string(Fi()).data()});
         s.append(")");
         return s;
     }
     if (imag==0)
-        return to_string(real);
-    string s = "(";
-    s.append(to_string(real));
+        return QString{to_string(real).data()};
+    QString s = "(";
+    s.append(QString{to_string(real).data()});
     s.push_back('+');
-    s.append(to_string(imag));
+    s.append(QString{to_string(imag).data()});
     s.append("i)");
     return s;
 }
