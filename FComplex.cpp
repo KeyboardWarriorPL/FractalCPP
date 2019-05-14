@@ -92,6 +92,8 @@ FComplex FComplex::operator/(const FComplex& z) const {
 }
 
 FComplex FComplex::power(const FComplex& z) const {
+    if (z.R() == 0)
+        return FComplex{1};
     FComplex pwr = FComplex{log(R()), Fi()} * z;
     pwr.set(exp(pwr.real), pwr.imag, true);
     return pwr;
