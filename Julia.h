@@ -2,6 +2,7 @@
 #include "Polynomial.h"
 #include "FComplex.h"
 #include <QtGui/QImage>
+#include <QtGui/QProgressBar>
 
 class Julia {
     double scale, threshold;
@@ -13,12 +14,13 @@ class Julia {
     public:
     Julia();
     Julia(double);
-    Julia(double, const Polynomial&, const Polynomial&);
+    Julia(double, double, const Polynomial&, const Polynomial&);
     Julia(const Julia&) = delete;
     ~Julia() = default;
 
     string ToString() const;
     void set(const Polynomial&, const Polynomial&);
+    void set(double);
     void rescale(double);
-    QImage& paint(QImage&, int, const FComplex&) const;
+    void paint(QImage&, int, const FComplex&, QProgressBar* progress=nullptr) const;
 };

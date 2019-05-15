@@ -11,6 +11,7 @@ class FComplex {
 
     public:
     FComplex();
+    FComplex(string);
     FComplex(double);
     FComplex(double, double, bool euler=false);
     FComplex(const FComplex&);

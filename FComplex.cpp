@@ -1,6 +1,12 @@
 #include "FComplex.h"
 
 FComplex::FComplex() : real(0), imag(0) {}
+FComplex::FComplex(string s) {
+    size_t pos = 0;
+    s = s.substr(1, s.size()-2);
+    pos = s.find('-');
+    pos = s.find('+');
+}
 FComplex::FComplex(double v) : real(v), imag(0) {}
 FComplex::FComplex(double r, double i, bool euler) {
     set(r, i, euler);

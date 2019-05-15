@@ -131,6 +131,39 @@ string Polynomial::ToString() const {
     s.append(factors->at(0).ToString());
     return s;
 }
-void Polynomial::fromString(const string&) {
-    // external lib? hell no! or regex maybe
+void Polynomial::fromString(const string& src) {
+    string cpy;
+    cpy.reserve(src.size());
+    for (auto c : src) {
+        if (c == 'x')
+            cpy.push_back('z');
+        else if (c == '-') {
+            cpy.push_back('+');
+            cpy.push_back('-');
+        }
+        else if (c != ' ')
+            cpy.push_back(c);
+    }
+    size_t pos = 0, plus = 0;
+    vector<string> parts;
+    while (plus > -1 && pos < cpy.size()) {
+        plus = cpy.find("+");
+        if (plus < 0)
+            parts.push_back(cpy.substr(pos));
+        else
+            parts.push_back(cpy.substr(pos, plus-pos));
+    }
+    int degree;
+    for (auto s : parts) {
+        if (s.size() <= 0)
+            continue;
+        degree = 0;
+        pos = s.find('^');
+        if (pos >= 0)
+            degree = atoi(s.substr(pos).data());
+        pos = s.find('z');
+        if (pos >= 0)
+            set(FComplex{s.substr(0, s.size()-pos)}, degree);
+        set(FComplex{s}, degree);
+    }
 }
