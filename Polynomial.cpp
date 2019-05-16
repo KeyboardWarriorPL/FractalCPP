@@ -12,7 +12,7 @@ Polynomial::Polynomial(const initializer_list<FComplex> a) : factors(new vector<
     for (auto i : a)
         factors->push_back(i);
 }
-Polynomial::Polynomial(const string& s) {
+Polynomial::Polynomial(const string& s) : Polynomial() {
     fromString(s);
 }
 Polynomial::~Polynomial() {
@@ -30,7 +30,7 @@ void Polynomial::set(const FComplex& z, size_t degree) {
         while (degree >= factors->size())
             factors->push_back({});
     }
-    factors->assign(degree, z);
+    factors->at(degree) = z;
 }
 
 FComplex Polynomial::calc(const FComplex& x) const {
@@ -144,14 +144,16 @@ void Polynomial::fromString(const string& src) {
         else if (c != ' ')
             cpy.push_back(c);
     }
-    size_t pos = 0, plus = 0;
+    int pos = 0, plus = 0;
     vector<string> parts;
     while (plus > -1 && pos < cpy.size()) {
-        plus = cpy.find("+");
+        plus = cpy.find("+", pos);
         if (plus < 0)
             parts.push_back(cpy.substr(pos));
-        else
+        else {
             parts.push_back(cpy.substr(pos, plus-pos));
+            pos = plus+1;
+        }
     }
     int degree;
     for (auto s : parts) {
@@ -160,10 +162,15 @@ void Polynomial::fromString(const string& src) {
         degree = 0;
         pos = s.find('^');
         if (pos >= 0)
-            degree = atoi(s.substr(pos).data());
+            degree = atoi(s.substr(pos+1).data());
         pos = s.find('z');
-        if (pos >= 0)
-            set(FComplex{s.substr(0, s.size()-pos)}, degree);
-        set(FComplex{s}, degree);
+        if (pos >= 0) {
+            if (pos > 0)
+                set(FComplex{s.substr(0, pos)}, degree);
+            else
+                set(1, degree);
+        }
+        else
+            set(FComplex{s}, degree);
     }
 }

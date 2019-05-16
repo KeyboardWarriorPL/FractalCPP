@@ -1,11 +1,29 @@
 #include "FComplex.h"
 
 FComplex::FComplex() : real(0), imag(0) {}
-FComplex::FComplex(string s) {
-    size_t pos = 0;
-    s = s.substr(1, s.size()-2);
+FComplex::FComplex(string s) : FComplex() {
+    int pos = -1, i = -1;
+    if (s[0] == '(')
+        s = s.substr(1, s.size()-2);
     pos = s.find('-');
+    if (pos >= 0)
+        s.insert(pos, "+");
     pos = s.find('+');
+    if (pos < 0) {
+        i = s.find('i');
+        if (i < 0)
+            real = atof(s.data());
+        else {
+            if (s.size() == 1)
+                imag = 1;
+            else
+                imag = atof(s.substr(0, s.size()-1).data());
+        }
+    }
+    else {
+        real = atof(s.substr(0,pos).data());
+        imag = atof(s.substr(pos+1, s.size()-2-pos).data());
+    }
 }
 FComplex::FComplex(double v) : real(v), imag(0) {}
 FComplex::FComplex(double r, double i, bool euler) {
@@ -99,9 +117,9 @@ FComplex FComplex::operator/(const FComplex& z) const {
 
 FComplex FComplex::power(const FComplex& z) const {
     if (z.R() == 0)
-        return FComplex{1};
-    FComplex pwr = FComplex{log(R()), Fi()} * z;
-    pwr.set(exp(pwr.real), pwr.imag, true);
+        return 1;
+    FComplex pwr;
+    pwr.set( exp(z.real*log(R()) - Fi()*z.imag), z.imag*log(R()) + Fi()*z.real, true);
     return pwr;
 }
 
@@ -117,7 +135,8 @@ string FComplex::ToString(bool euler) const {
         return to_string(real);
     string s = "(";
     s.append(to_string(real));
-    s.push_back('+');
+    if (imag >= 0)
+        s.push_back('+');
     s.append(to_string(imag));
     s.append("i)");
     return s;

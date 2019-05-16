@@ -224,7 +224,7 @@ public:
         label_5->setText(QApplication::translate("Main", "Constant R:", 0, QApplication::UnicodeUTF8));
         infoLabel->setText(QApplication::translate("Main", "Click generate", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("Main", "Detail:", 0, QApplication::UnicodeUTF8));
-        fText->setPlainText(QApplication::translate("Main", "z^2", 0, QApplication::UnicodeUTF8));
+        fText->setPlainText(QApplication::translate("Main", "1z^2", 0, QApplication::UnicodeUTF8));
         gText->setPlainText(QApplication::translate("Main", "1", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

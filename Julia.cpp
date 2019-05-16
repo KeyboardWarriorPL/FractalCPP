@@ -40,7 +40,7 @@ void Julia::paint(QImage& plot, int iterations, const FComplex& c, QProgressBar*
     FComplex z;
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            z.set(((double)x / width - 0.5) * 4.0 / scale, ((double)y / height - 0.5) * 4.0 / scale);
+            z.set(((double)x / width - 0.5) * 3.0 / scale, ((double)y / height - 0.5) * 3.0 / scale);
             plot.setPixel(x, y, process(iterations, z, c));
             if (progress != nullptr)
                 progress->setValue(100.0*y / height);
