@@ -3,7 +3,7 @@
 
 Julia::Julia() : Julia(1) {}
 Julia::Julia(double zoom) : Julia(zoom, Polynomial(), Polynomial({1})) {}
-Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), cmap(0xffffff), f(numerator), g(denominator) {}
+Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), offset{0, 0}, cmap(0xffffff), f(numerator), g(denominator) {}
 
 string Julia::ToString() const {
     string s = f.ToString();
@@ -17,6 +17,10 @@ void Julia::set(const Polynomial& numerator, const Polynomial& denominator) {
 }
 void Julia::colormap(int c) {
     cmap = c;
+}
+void Julia::reposition(double x, double y) {
+    offset[0] = x;
+    offset[1] = y;
 }
 void Julia::rescale(double zoom) {
     scale = zoom;
@@ -41,7 +45,7 @@ void Julia::paint(QImage& plot, int iterations, const FComplex& c, QProgressBar*
     FComplex z;
     for (int y = 0; y <= height; y++) {
         for (int x = 0; x <= width; x++) {
-            z.set(((double)x / width - 0.5) * 4.0 / scale, ((double)y / height - 0.5) * 4.0 / scale);
+            z.set(((offset[0] + x) / width - 0.5) * 4.0 / scale, ((offset[1] + y) / height - 0.5) * 4.0 / scale);
             plot.setPixel(x, y, process(iterations, z, c));
             if (progress != nullptr)
                 progress->setValue(100.0*y / height);

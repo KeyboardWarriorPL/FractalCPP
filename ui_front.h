@@ -120,6 +120,7 @@ public:
 
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->viewport()->setProperty("cursor", QVariant(QCursor(Qt::OpenHandCursor)));
 
         gridLayout->addWidget(graphicsView, 0, 1, 16, 2);
 
@@ -205,6 +206,17 @@ public:
         statusbar = new QStatusBar(Main);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         Main->setStatusBar(statusbar);
+        QWidget::setTabOrder(savButton, genButton);
+        QWidget::setTabOrder(genButton, iterSpin);
+        QWidget::setTabOrder(iterSpin, redSpin);
+        QWidget::setTabOrder(redSpin, greenSpin);
+        QWidget::setTabOrder(greenSpin, blueSpin);
+        QWidget::setTabOrder(blueSpin, zoomSpin);
+        QWidget::setTabOrder(zoomSpin, fiSlider);
+        QWidget::setTabOrder(fiSlider, rSpin);
+        QWidget::setTabOrder(rSpin, fText);
+        QWidget::setTabOrder(fText, gText);
+        QWidget::setTabOrder(gText, graphicsView);
 
         retranslateUi(Main);
 

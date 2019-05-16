@@ -5,7 +5,7 @@
 #include <QtGui/QProgressBar>
 
 class Julia {
-    double scale;
+    double scale, offset[2];
     int cmap;
     Polynomial f, g;
 
@@ -22,6 +22,7 @@ class Julia {
     string ToString() const;
     void set(const Polynomial&, const Polynomial&);
     void colormap(int);
+    void reposition(double, double);
     void rescale(double);
     void paint(QImage&, int, const FComplex&, QProgressBar* progress=nullptr) const;
 };
