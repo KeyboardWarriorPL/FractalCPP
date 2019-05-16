@@ -14,12 +14,12 @@ void FrontForm::drawFractal() {
     image = new QImage{form.graphicsView->width(), form.graphicsView->height(), QImage::Format_RGB32};
 
     jgen->rescale(form.zoomSpin->value());
-    jgen->set(Polynomial({0,0,1}), Polynomial({1,0}));
-    jgen->set(form.detailSpin->value());
+    jgen->colormap((form.redSpin->value()<<16) + (form.greenSpin->value()<<8) + form.blueSpin->value());
+    jgen->set(Polynomial(form.fText->toPlainText().toStdString()), Polynomial(form.gText->toPlainText().toStdString()));
     FComplex cnst = FComplex{form.rSpin->value(), 2*M_PI*form.fiSlider->value()/form.fiSlider->maximum(), true};
     form.infoLabel->setText(cnst.ToString().data());
 
-    // QtConcurrent::run<void>(jgen->paint, test, form.iterSpin->value(), cnst, form.progressBar);
+    // QtConcurrent::run<void>(jgen->paint, *image, form.iterSpin->value(), cnst, form.progressBar);
     jgen->paint(*image, form.iterSpin->value(), cnst, form.progressBar);
 
     scene->clear();
