@@ -2,6 +2,7 @@
 #include "Julia.h"
 #include "ui_front.h"
 #include <QtCore/QtConcurrentRun>
+#include <QtGui/QFileDialog>
 
 class FrontForm : public QMainWindow {
     Q_OBJECT

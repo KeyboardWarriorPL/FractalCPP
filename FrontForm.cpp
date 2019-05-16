@@ -28,7 +28,7 @@ void FrontForm::drawFractal() {
 }
 
 void FrontForm::saveImage() {
-    FComplex parsed = FComplex{2}.power(2);
-    form.infoLabel->setText(parsed.ToString().data());
-    // image->save();
+    QString path = QFileDialog::getSaveFileName(this, "Save as", "", ".png");
+    if (path.size() > 0)
+        image->save(path);
 }

@@ -1,4 +1,5 @@
 #include "Julia.h"
+#include <iostream>
 
 Julia::Julia() : Julia(1) {}
 Julia::Julia(double zoom) : Julia(zoom, Polynomial(), Polynomial({1})) {}
@@ -24,7 +25,8 @@ void Julia::rescale(double zoom) {
 int Julia::process(int iters, const FComplex& start, const FComplex& c) const {
     FComplex n{start};
     for (int i = 0; i < iters; i++) {
-        n = f(n) / g(n) + c;
+        //n = f(n) / g(n) + c;
+        n.set(n.Real() * n.Real() - n.Imag() * n.Imag() + c.Real(), 2*n.Real()*n.Imag() + c.Imag());
         if (n.R() >= 4 / scale)
             return getColor((double)i / iters);
     }
@@ -33,14 +35,15 @@ int Julia::process(int iters, const FComplex& start, const FComplex& c) const {
 int Julia::getColor(double progress) const {
     if (progress >= 1)
         return 0;
-    return cmap * (1.0 - progress);
+    return cmap * exp(-progress);
 }
 void Julia::paint(QImage& plot, int iterations, const FComplex& c, QProgressBar* progress) const {
-    int width = plot.width(), height = plot.height();
+    cout << f.ToString() << " g: " << g.ToString() << endl;
+    int width = plot.width()-1, height = plot.height()-1;
     FComplex z;
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            z.set(((double)x / width - 0.5) * 3.0 / scale, ((double)y / height - 0.5) * 3.0 / scale);
+    for (int y = 0; y <= height; y++) {
+        for (int x = 0; x <= width; x++) {
+            z.set(((double)x / width - 0.5) * 4.0 / scale, ((double)y / height - 0.5) * 4.0 / scale);
             plot.setPixel(x, y, process(iterations, z, c));
             if (progress != nullptr)
                 progress->setValue(100.0*y / height);

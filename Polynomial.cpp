@@ -165,6 +165,8 @@ void Polynomial::fromString(const string& src) {
             degree = atoi(s.substr(pos+1).data());
         pos = s.find('z');
         if (pos >= 0) {
+            if (degree <= 0)
+                degree++;
             if (pos > 0)
                 set(FComplex{s.substr(0, pos)}, degree);
             else
