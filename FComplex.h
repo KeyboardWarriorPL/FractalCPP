@@ -40,4 +40,5 @@ class FComplex {
     FComplex power(const FComplex&) const;
 
     string ToString(bool euler=false) const;
+    operator string();
 };

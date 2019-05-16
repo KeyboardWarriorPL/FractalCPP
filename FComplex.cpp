@@ -30,8 +30,8 @@ FComplex::FComplex(double r, double i, bool euler) {
     set(r, i, euler);
 }
 FComplex::FComplex(const FComplex& z) {
-    real = z.real;
-    imag = z.imag;
+    real = {z.real};
+    imag = {z.imag};
 }
 FComplex::FComplex(const complex<double>& z) {
     real = z.real();
@@ -104,18 +104,20 @@ FComplex FComplex::operator-(const FComplex& z) const {
 }
 FComplex FComplex::operator*(const FComplex& z) const {
     FComplex mul{*this};
-    mul.real = mul.real * z.real - mul.imag * z.imag;
-    mul.imag = mul.real * z.imag + z.real * mul.imag;
+    mul.real = real * z.real - imag * z.imag;
+    mul.imag = real * z.imag + z.real * imag;
     return mul;
 }
 FComplex FComplex::operator/(const FComplex& z) const {
     FComplex mul{*this};
-    mul.real = (mul.real * z.real + mul.imag * z.imag) / pow(z.R(), 2);
-    mul.imag = (mul.imag * z.real - mul.real * z.imag) / pow(z.R(), 2);
+    mul.real = (real * z.real + imag * z.imag) / pow(z.R(), 2);
+    mul.imag = (imag * z.real - real * z.imag) / pow(z.R(), 2);
     return mul;
 }
 
 FComplex FComplex::power(const FComplex& z) const {
+    if (R() == 0)
+        return 0;
     if (z.R() == 0)
         return 1;
     FComplex pwr;
@@ -140,4 +142,8 @@ string FComplex::ToString(bool euler) const {
     s.append(to_string(imag));
     s.append("i)");
     return s;
+}
+
+FComplex::operator string() {
+    return ToString();
 }

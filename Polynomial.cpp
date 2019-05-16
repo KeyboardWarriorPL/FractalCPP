@@ -176,3 +176,7 @@ void Polynomial::fromString(const string& src) {
             set(FComplex{s}, degree);
     }
 }
+
+Polynomial::operator string() {
+    return ToString();
+}

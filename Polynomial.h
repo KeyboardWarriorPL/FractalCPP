@@ -39,4 +39,5 @@ class Polynomial {
     Polynomial& operator=(const Polynomial&);
 
     string ToString() const;
+    operator string();
 };
