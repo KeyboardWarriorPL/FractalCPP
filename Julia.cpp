@@ -1,5 +1,4 @@
 #include "Julia.h"
-#include <iostream>
 
 Julia::Julia() : Julia(1) {}
 Julia::Julia(double zoom) : Julia(zoom, Polynomial(), Polynomial({1})) {}
@@ -19,8 +18,8 @@ void Julia::colormap(int c) {
     cmap = c;
 }
 void Julia::reposition(double x, double y) {
-    offset[0] = x;
-    offset[1] = y;
+    offset[0] += x;
+    offset[1] += y;
 }
 void Julia::rescale(double zoom) {
     scale = zoom;

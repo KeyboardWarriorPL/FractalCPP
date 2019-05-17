@@ -7,6 +7,7 @@ FrontForm::FrontForm(QMainWindow *parent) : QMainWindow(parent) {
     image = new QImage{form.graphicsView->width(), form.graphicsView->height(), QImage::Format_RGB32};
     QObject::connect(form.genButton, SIGNAL(clicked()), this, SLOT(drawFractal()));
     QObject::connect(form.savButton, SIGNAL(clicked()), this, SLOT(saveImage()));
+    form.graphicsView->source = jgen;
 }
 
 void FrontForm::drawFractal() {
@@ -30,12 +31,3 @@ void FrontForm::saveImage() {
     if (path.size() > 0)
         image->save(path);
 }
-
-// void FrontForm::mouseStart() {
-//     mouse = QCursor::pos();
-// }
-
-// void FrontForm::mouseEnd() {
-//     QPoint result = QCursor::pos();
-//     jgen->reposition((result.x() - mouse.x()) / form.graphicsView->width(), (result.y() - mouse.y()) / form.graphicsView->height());
-// }

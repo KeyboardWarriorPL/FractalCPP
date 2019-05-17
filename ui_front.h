@@ -14,7 +14,6 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QDoubleSpinBox>
-#include <QtGui/QGraphicsView>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
@@ -28,6 +27,7 @@
 #include <QtGui/QSpinBox>
 #include <QtGui/QStatusBar>
 #include <QtGui/QWidget>
+#include "CustomGraphics.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -45,7 +45,7 @@ public:
     QProgressBar *progressBar;
     QPushButton *genButton;
     QLabel *label_3;
-    QGraphicsView *graphicsView;
+    CustomGraphics *graphicsView;
     QLabel *label_2;
     QSpinBox *iterSpin;
     QSlider *fiSlider;
@@ -118,7 +118,7 @@ public:
 
         gridLayout->addWidget(label_3, 6, 0, 1, 1);
 
-        graphicsView = new QGraphicsView(centralwidget);
+        graphicsView = new CustomGraphics(centralwidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
         graphicsView->viewport()->setProperty("cursor", QVariant(QCursor(Qt::OpenHandCursor)));
 

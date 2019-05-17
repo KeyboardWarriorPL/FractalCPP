@@ -89,7 +89,7 @@
        </widget>
       </item>
       <item row="0" column="1" rowspan="16" colspan="2">
-       <widget class="QGraphicsView" name="graphicsView">
+       <widget class="CustomGraphics" name="graphicsView">
         <property name="cursor" stdset="0">
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
@@ -212,6 +212,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CustomGraphics</class>
+   <extends>QGraphicsView</extends>
+   <header>CustomGraphics.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>savButton</tabstop>
   <tabstop>genButton</tabstop>

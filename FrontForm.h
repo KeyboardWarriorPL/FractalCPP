@@ -1,9 +1,8 @@
 #pragma once
 #include "Julia.h"
 #include "ui_front.h"
-#include <QtCore/QtConcurrentRun>
 #include <QtGui/QFileDialog>
-#include <QtGui/QMouseEvent>
+// not necessary since UI is updated synchronusly #include <QtCore/QtConcurrentRun>
 
 class FrontForm : public QMainWindow {
     Q_OBJECT
@@ -11,10 +10,6 @@ class FrontForm : public QMainWindow {
     public:
     FrontForm(QMainWindow *parent);
     ~FrontForm() = default;
-
-    protected:
-    void mousePressEvent(QMouseEvent*) override;
-    void mouseReleaseEvent(QMouseEvent*) override;
 
     private slots:
     void drawFractal();
@@ -25,5 +20,4 @@ class FrontForm : public QMainWindow {
     QImage *image;
     QGraphicsScene *scene;
     Julia *jgen;
-    QPoint mouse;
 };
