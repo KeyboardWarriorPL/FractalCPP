@@ -1,6 +1,5 @@
 #pragma once
 #include <QtGui/QSpinBox>
-#include <iostream>
 
 class CustomSpinner : public QSpinBox {
     Q_OBJECT

@@ -2,7 +2,7 @@
 #include "Julia.h"
 #include "ui_front.h"
 #include <QtGui/QFileDialog>
-// not necessary since UI is updated synchronusly #include <QtCore/QtConcurrentRun>
+// #include <QtCore/QtConcurrentRun> not necessary since UI is updated synchronusly
 
 class FrontForm : public QMainWindow {
     Q_OBJECT
@@ -14,6 +14,7 @@ class FrontForm : public QMainWindow {
     private slots:
     void drawFractal();
     void saveImage();
+    void resetPos();
 
     private:
     Ui::Main form;

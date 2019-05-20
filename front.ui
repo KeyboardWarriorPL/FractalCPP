@@ -20,14 +20,14 @@
       <property name="sizeConstraint">
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
-      <item row="13" column="0">
+      <item row="14" column="0">
        <widget class="QPlainTextEdit" name="gText">
         <property name="plainText">
          <string>1</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Constant FI:</string>
@@ -43,7 +43,7 @@
          <double>0.000100000000000</double>
         </property>
         <property name="maximum">
-         <double>1000.000000000000000</double>
+         <double>100000.000000000000000</double>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -67,7 +67,7 @@
         </property>
        </widget>
       </item>
-      <item row="15" column="0">
+      <item row="16" column="0">
        <widget class="QProgressBar" name="progressBar">
         <property name="value">
          <number>100</number>
@@ -88,7 +88,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1" rowspan="16" colspan="2">
+      <item row="0" column="1" rowspan="17" colspan="2">
        <widget class="CustomGraphics" name="graphicsView">
         <property name="cursor" stdset="0">
          <cursorShape>OpenHandCursor</cursorShape>
@@ -115,7 +115,7 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="0">
+      <item row="10" column="0">
        <widget class="QSlider" name="fiSlider">
         <property name="maximum">
          <number>1000</number>
@@ -125,14 +125,14 @@
         </property>
        </widget>
       </item>
-      <item row="10" column="0">
+      <item row="11" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string>Constant R:</string>
         </property>
        </widget>
       </item>
-      <item row="11" column="0">
+      <item row="12" column="0">
        <widget class="QDoubleSpinBox" name="rSpin">
         <property name="decimals">
          <number>4</number>
@@ -142,14 +142,14 @@
         </property>
        </widget>
       </item>
-      <item row="14" column="0">
+      <item row="15" column="0">
        <widget class="QLabel" name="infoLabel">
         <property name="text">
          <string>Click generate</string>
         </property>
        </widget>
       </item>
-      <item row="12" column="0">
+      <item row="13" column="0">
        <widget class="QPlainTextEdit" name="fText">
         <property name="minimumSize">
          <size>
@@ -194,6 +194,13 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="8" column="0">
+       <widget class="QPushButton" name="resetButton">
+        <property name="text">
+         <string>Reset position</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

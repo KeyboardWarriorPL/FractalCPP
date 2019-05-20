@@ -7,6 +7,7 @@ FrontForm::FrontForm(QMainWindow *parent) : QMainWindow(parent) {
     image = new QImage{form.graphicsView->width(), form.graphicsView->height(), QImage::Format_RGB32};
     QObject::connect(form.genButton, SIGNAL(clicked()), this, SLOT(drawFractal()));
     QObject::connect(form.savButton, SIGNAL(clicked()), this, SLOT(saveImage()));
+    QObject::connect(form.resetButton, SIGNAL(clicked()), this, SLOT(resetPos()));
     form.graphicsView->source = jgen;
 }
 
@@ -14,8 +15,8 @@ void FrontForm::drawFractal() {
     delete image;
     image = new QImage{form.graphicsView->width(), form.graphicsView->height(), QImage::Format_RGB32};
     jgen->rescale(form.zoomSpin->value());
-    //jgen->colormap((form.redSpin->value()<<16) + (form.greenSpin->value()<<8) + form.blueSpin->value());
     jgen->set(Polynomial(form.fText->toPlainText().toStdString()), Polynomial(form.gText->toPlainText().toStdString()));
+    jgen->colormap(form.colorSpin->value(), form.shiftSpin->value());
     FComplex cnst = FComplex{form.rSpin->value(), 2*M_PI*form.fiSlider->value()/form.fiSlider->maximum(), true};
     form.infoLabel->setText(cnst.ToString().data());
 
@@ -30,4 +31,8 @@ void FrontForm::saveImage() {
     QString path = QFileDialog::getSaveFileName(this, "Save as", ".png", ".png");
     if (path.size() > 0)
         image->save(path);
+}
+
+void FrontForm::resetPos() {
+    jgen->reposition(0,0,true);
 }

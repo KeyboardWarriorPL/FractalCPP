@@ -5,12 +5,15 @@
 #include <QtGui/QProgressBar>
 
 class Julia {
+    static const double XRANGE, YRANGE;
     double scale, offset[2];
-    int cmap;
+    int cmap, mapshift;
     Polynomial f, g;
 
     int process(int, const FComplex&, const FComplex&) const;
     int getColor(double) const;
+    int reshiftMap(int) const;
+    int unshiftMap(int) const;
 
     public:
     Julia();
@@ -21,8 +24,8 @@ class Julia {
 
     string ToString() const;
     void set(const Polynomial&, const Polynomial&);
-    void colormap(int);
-    void reposition(double, double);
+    void colormap(int, int);
+    void reposition(double, double, bool set=false);
     void rescale(double);
     void paint(QImage&, int, const FComplex&, QProgressBar* progress=nullptr) const;
 };

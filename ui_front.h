@@ -57,6 +57,7 @@ public:
     QHBoxLayout *horizontalLayout;
     CustomSpinner *colorSpin;
     QSpinBox *shiftSpin;
+    QPushButton *resetButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -75,18 +76,18 @@ public:
         gText = new QPlainTextEdit(centralwidget);
         gText->setObjectName(QString::fromUtf8("gText"));
 
-        gridLayout->addWidget(gText, 13, 0, 1, 1);
+        gridLayout->addWidget(gText, 14, 0, 1, 1);
 
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
-        gridLayout->addWidget(label_4, 8, 0, 1, 1);
+        gridLayout->addWidget(label_4, 9, 0, 1, 1);
 
         zoomSpin = new QDoubleSpinBox(centralwidget);
         zoomSpin->setObjectName(QString::fromUtf8("zoomSpin"));
         zoomSpin->setDecimals(4);
         zoomSpin->setMinimum(0.0001);
-        zoomSpin->setMaximum(1000);
+        zoomSpin->setMaximum(100000);
         zoomSpin->setSingleStep(0.1);
         zoomSpin->setValue(1);
 
@@ -106,7 +107,7 @@ public:
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setValue(100);
 
-        gridLayout->addWidget(progressBar, 15, 0, 1, 1);
+        gridLayout->addWidget(progressBar, 16, 0, 1, 1);
 
         genButton = new QPushButton(centralwidget);
         genButton->setObjectName(QString::fromUtf8("genButton"));
@@ -122,7 +123,7 @@ public:
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
         graphicsView->viewport()->setProperty("cursor", QVariant(QCursor(Qt::OpenHandCursor)));
 
-        gridLayout->addWidget(graphicsView, 0, 1, 16, 2);
+        gridLayout->addWidget(graphicsView, 0, 1, 17, 2);
 
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -142,30 +143,30 @@ public:
         fiSlider->setMaximum(1000);
         fiSlider->setOrientation(Qt::Horizontal);
 
-        gridLayout->addWidget(fiSlider, 9, 0, 1, 1);
+        gridLayout->addWidget(fiSlider, 10, 0, 1, 1);
 
         label_5 = new QLabel(centralwidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout->addWidget(label_5, 10, 0, 1, 1);
+        gridLayout->addWidget(label_5, 11, 0, 1, 1);
 
         rSpin = new QDoubleSpinBox(centralwidget);
         rSpin->setObjectName(QString::fromUtf8("rSpin"));
         rSpin->setDecimals(4);
         rSpin->setMaximum(100);
 
-        gridLayout->addWidget(rSpin, 11, 0, 1, 1);
+        gridLayout->addWidget(rSpin, 12, 0, 1, 1);
 
         infoLabel = new QLabel(centralwidget);
         infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
 
-        gridLayout->addWidget(infoLabel, 14, 0, 1, 1);
+        gridLayout->addWidget(infoLabel, 15, 0, 1, 1);
 
         fText = new QPlainTextEdit(centralwidget);
         fText->setObjectName(QString::fromUtf8("fText"));
         fText->setMinimumSize(QSize(0, 0));
 
-        gridLayout->addWidget(fText, 12, 0, 1, 1);
+        gridLayout->addWidget(fText, 13, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -187,6 +188,11 @@ public:
 
 
         gridLayout->addLayout(horizontalLayout, 5, 0, 1, 1);
+
+        resetButton = new QPushButton(centralwidget);
+        resetButton->setObjectName(QString::fromUtf8("resetButton"));
+
+        gridLayout->addWidget(resetButton, 8, 0, 1, 1);
 
         gridLayout->setColumnStretch(0, 1);
         gridLayout->setColumnStretch(1, 6);
@@ -231,6 +237,7 @@ public:
         infoLabel->setText(QApplication::translate("Main", "Click generate", 0, QApplication::UnicodeUTF8));
         fText->setPlainText(QApplication::translate("Main", "1z^2", 0, QApplication::UnicodeUTF8));
         colorSpin->setPrefix(QApplication::translate("Main", "0x", 0, QApplication::UnicodeUTF8));
+        resetButton->setText(QApplication::translate("Main", "Reset position", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
