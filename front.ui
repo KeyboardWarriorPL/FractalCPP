@@ -165,32 +165,31 @@
       <item row="5" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QSpinBox" name="redSpin">
+         <widget class="CustomSpinner" name="colorSpin">
+          <property name="prefix">
+           <string>0x</string>
+          </property>
           <property name="maximum">
-           <number>255</number>
+           <number>16777215</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
           </property>
           <property name="value">
-           <number>255</number>
+           <number>16777215</number>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="greenSpin">
+         <widget class="QSpinBox" name="shiftSpin">
+          <property name="minimum">
+           <number>1</number>
+          </property>
           <property name="maximum">
-           <number>255</number>
+           <number>3</number>
           </property>
           <property name="value">
-           <number>255</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="blueSpin">
-          <property name="maximum">
-           <number>255</number>
-          </property>
-          <property name="value">
-           <number>255</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -218,14 +217,18 @@
    <extends>QGraphicsView</extends>
    <header>CustomGraphics.h</header>
   </customwidget>
+  <customwidget>
+   <class>CustomSpinner</class>
+   <extends>QSpinBox</extends>
+   <header>CustomSpinner.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>savButton</tabstop>
   <tabstop>genButton</tabstop>
   <tabstop>iterSpin</tabstop>
-  <tabstop>redSpin</tabstop>
-  <tabstop>greenSpin</tabstop>
-  <tabstop>blueSpin</tabstop>
+  <tabstop>colorSpin</tabstop>
+  <tabstop>shiftSpin</tabstop>
   <tabstop>zoomSpin</tabstop>
   <tabstop>fiSlider</tabstop>
   <tabstop>rSpin</tabstop>

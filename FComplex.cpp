@@ -30,8 +30,8 @@ FComplex::FComplex(double r, double i, bool euler) {
     set(r, i, euler);
 }
 FComplex::FComplex(const FComplex& z) {
-    real = {z.real};
-    imag = {z.imag};
+    real = z.Real();
+    imag = z.Imag();
 }
 FComplex::FComplex(const complex<double>& z) {
     real = z.real();

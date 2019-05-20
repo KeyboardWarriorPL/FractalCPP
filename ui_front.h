@@ -28,6 +28,7 @@
 #include <QtGui/QStatusBar>
 #include <QtGui/QWidget>
 #include "CustomGraphics.h"
+#include "CustomSpinner.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -54,9 +55,8 @@ public:
     QLabel *infoLabel;
     QPlainTextEdit *fText;
     QHBoxLayout *horizontalLayout;
-    QSpinBox *redSpin;
-    QSpinBox *greenSpin;
-    QSpinBox *blueSpin;
+    CustomSpinner *colorSpin;
+    QSpinBox *shiftSpin;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -169,26 +169,21 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        redSpin = new QSpinBox(centralwidget);
-        redSpin->setObjectName(QString::fromUtf8("redSpin"));
-        redSpin->setMaximum(255);
-        redSpin->setValue(255);
+        colorSpin = new CustomSpinner(centralwidget);
+        colorSpin->setObjectName(QString::fromUtf8("colorSpin"));
+        colorSpin->setMaximum(16777215);
+        colorSpin->setSingleStep(1);
+        colorSpin->setValue(16777215);
 
-        horizontalLayout->addWidget(redSpin);
+        horizontalLayout->addWidget(colorSpin);
 
-        greenSpin = new QSpinBox(centralwidget);
-        greenSpin->setObjectName(QString::fromUtf8("greenSpin"));
-        greenSpin->setMaximum(255);
-        greenSpin->setValue(255);
+        shiftSpin = new QSpinBox(centralwidget);
+        shiftSpin->setObjectName(QString::fromUtf8("shiftSpin"));
+        shiftSpin->setMinimum(1);
+        shiftSpin->setMaximum(3);
+        shiftSpin->setValue(1);
 
-        horizontalLayout->addWidget(greenSpin);
-
-        blueSpin = new QSpinBox(centralwidget);
-        blueSpin->setObjectName(QString::fromUtf8("blueSpin"));
-        blueSpin->setMaximum(255);
-        blueSpin->setValue(255);
-
-        horizontalLayout->addWidget(blueSpin);
+        horizontalLayout->addWidget(shiftSpin);
 
 
         gridLayout->addLayout(horizontalLayout, 5, 0, 1, 1);
@@ -208,10 +203,9 @@ public:
         Main->setStatusBar(statusbar);
         QWidget::setTabOrder(savButton, genButton);
         QWidget::setTabOrder(genButton, iterSpin);
-        QWidget::setTabOrder(iterSpin, redSpin);
-        QWidget::setTabOrder(redSpin, greenSpin);
-        QWidget::setTabOrder(greenSpin, blueSpin);
-        QWidget::setTabOrder(blueSpin, zoomSpin);
+        QWidget::setTabOrder(iterSpin, colorSpin);
+        QWidget::setTabOrder(colorSpin, shiftSpin);
+        QWidget::setTabOrder(shiftSpin, zoomSpin);
         QWidget::setTabOrder(zoomSpin, fiSlider);
         QWidget::setTabOrder(fiSlider, rSpin);
         QWidget::setTabOrder(rSpin, fText);
@@ -236,6 +230,7 @@ public:
         label_5->setText(QApplication::translate("Main", "Constant R:", 0, QApplication::UnicodeUTF8));
         infoLabel->setText(QApplication::translate("Main", "Click generate", 0, QApplication::UnicodeUTF8));
         fText->setPlainText(QApplication::translate("Main", "1z^2", 0, QApplication::UnicodeUTF8));
+        colorSpin->setPrefix(QApplication::translate("Main", "0x", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

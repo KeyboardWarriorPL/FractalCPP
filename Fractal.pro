@@ -13,9 +13,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += qt
 
 # Input
-HEADERS += FComplex.h Polynomial.h Julia.h CustomGraphics.h FrontForm.h
+HEADERS += FComplex.h Polynomial.h Julia.h CustomGraphics.h CustomSpinner.h FrontForm.h
 FORMS += front.ui
-SOURCES += main.cpp FComplex.cpp Polynomial.cpp Julia.cpp CustomGraphics.cpp FrontForm.cpp
+SOURCES += main.cpp FComplex.cpp Polynomial.cpp Julia.cpp CustomGraphics.cpp CustomSpinner.cpp FrontForm.cpp
 
 LIBS += -L/usr/local/lib
 
