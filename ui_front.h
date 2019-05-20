@@ -134,6 +134,7 @@ public:
         iterSpin->setObjectName(QString::fromUtf8("iterSpin"));
         iterSpin->setMinimum(1);
         iterSpin->setMaximum(1000000);
+        iterSpin->setSingleStep(10);
         iterSpin->setValue(1000);
 
         gridLayout->addWidget(iterSpin, 3, 0, 1, 1);
@@ -154,6 +155,7 @@ public:
         rSpin->setObjectName(QString::fromUtf8("rSpin"));
         rSpin->setDecimals(4);
         rSpin->setMaximum(100);
+        rSpin->setSingleStep(0.1);
 
         gridLayout->addWidget(rSpin, 12, 0, 1, 1);
 
