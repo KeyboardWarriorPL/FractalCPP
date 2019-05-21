@@ -3,6 +3,7 @@
 #include <QtGui/QGraphicsView>
 #include "Julia.h"
 
+/// Extension of QGraphicsView supporting mouse press/release events
 class CustomGraphics : public QGraphicsView {
     Q_OBJECT
 

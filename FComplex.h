@@ -5,7 +5,7 @@
 
 using namespace std;
 
-/// a better implementation of complex number
+/// Complex number implementation supporting Euler form parameters
 class FComplex {
     double real, imag;
 

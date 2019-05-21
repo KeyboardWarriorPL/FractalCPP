@@ -4,6 +4,7 @@
 #include <QtGui/QFileDialog>
 // #include <QtCore/QtConcurrentRun> not necessary since UI is updated synchronusly
 
+/// Main window of Fractal application
 class FrontForm : public QMainWindow {
     Q_OBJECT
 

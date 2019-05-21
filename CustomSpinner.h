@@ -1,6 +1,7 @@
 #pragma once
 #include <QtGui/QSpinBox>
 
+/// Hexadecimal QSpinBox
 class CustomSpinner : public QSpinBox {
     Q_OBJECT
 

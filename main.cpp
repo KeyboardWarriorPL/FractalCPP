@@ -1,4 +1,3 @@
-#include <iostream>
 #if __has_include(<QApplication>)
 #include <QtGui>
 #else

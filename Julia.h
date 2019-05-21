@@ -4,6 +4,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QProgressBar>
 
+/// Julia set generator class
 class Julia {
     static const double XRANGE, YRANGE;
     double scale, offset[2];

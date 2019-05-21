@@ -6,6 +6,7 @@
 
 using namespace std;
 
+/// Polynomial implementation with basic from string conversion
 class Polynomial {
     vector<FComplex> *factors;
 
