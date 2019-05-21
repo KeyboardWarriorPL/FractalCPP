@@ -38,7 +38,7 @@ int Julia::process(int iters, const FComplex& start, const FComplex& c) const {
     FComplex n{start};
     for (int i = 0; i < iters; i++) {
         n = f(n) / g(n) + c;
-        if (n.R() >= sqrt(XRANGE*YRANGE))
+        if (n.R() >= sqrt(XRANGE*XRANGE+YRANGE*YRANGE))
             return getColor((double)i / iters);
     }
     return getColor(1);
