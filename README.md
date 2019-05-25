@@ -1,7 +1,8 @@
 <h1>Installation:</h1>
 <p>
-qmake (OPTIONAL)
-make OR make install
+qmake (OPTIONAL)<br>
+make -OR- make install<br>
+to build tests uncomment marked line in main.cpp
 </p>
 <h1>How to use:</h1>
 <p>

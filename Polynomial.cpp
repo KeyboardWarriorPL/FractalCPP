@@ -1,4 +1,5 @@
 #include "Polynomial.h"
+#include <iostream>
 
 Polynomial::Polynomial() : factors(new vector<FComplex>{}) {}
 Polynomial::Polynomial(const Polynomial& p) : Polynomial() {
@@ -144,6 +145,26 @@ void Polynomial::fromString(const string& src) {
         else if (c != ' ')
             cpy.push_back(c);
     }
+    regex rgx{"[0-9i().-+]*z[^][0-9]+"};
+    smatch mch;
+    for (auto z : mch) {
+        cout << z << endl;
+    }
+    regex_search(cpy, mch, rgx);
+}
+/*void Polynomial::fromString(const string& src) {
+    string cpy;
+    cpy.reserve(src.size());
+    for (auto c : src) {
+        if (c == 'x')
+            cpy.push_back('z');
+        else if (c == '-') {
+            cpy.push_back('+');
+            cpy.push_back('-');
+        }
+        else if (c != ' ')
+            cpy.push_back(c);
+    }
     int pos = 0, plus = 0;
     vector<string> parts;
     while (plus > -1 && pos < cpy.size()) {
@@ -176,7 +197,15 @@ void Polynomial::fromString(const string& src) {
             set(FComplex{s}, degree);
     }
 }
+*/
 
 Polynomial::operator string() {
     return ToString();
+}
+
+vector<FComplex>::iterator Polynomial::begin() {
+    return factors->begin();
+}
+vector<FComplex>::iterator Polynomial::end() {
+    return factors->end();
 }

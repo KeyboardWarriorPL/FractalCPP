@@ -41,4 +41,7 @@ class Polynomial {
 
     string ToString() const;
     operator string();
+
+    vector<FComplex>::iterator begin();
+    vector<FComplex>::iterator end();
 };
