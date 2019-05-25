@@ -145,59 +145,13 @@ void Polynomial::fromString(const string& src) {
         else if (c != ' ')
             cpy.push_back(c);
     }
-    regex rgx{"[0-9i().-+]*z[^][0-9]+"};
+    regex rgx{"[0-9.]*z[^][0-9]+"};
     smatch mch;
+    regex_search(cpy, mch, rgx);
     for (auto z : mch) {
         cout << z << endl;
     }
-    regex_search(cpy, mch, rgx);
 }
-/*void Polynomial::fromString(const string& src) {
-    string cpy;
-    cpy.reserve(src.size());
-    for (auto c : src) {
-        if (c == 'x')
-            cpy.push_back('z');
-        else if (c == '-') {
-            cpy.push_back('+');
-            cpy.push_back('-');
-        }
-        else if (c != ' ')
-            cpy.push_back(c);
-    }
-    int pos = 0, plus = 0;
-    vector<string> parts;
-    while (plus > -1 && pos < cpy.size()) {
-        plus = cpy.find("+", pos);
-        if (plus < 0)
-            parts.push_back(cpy.substr(pos));
-        else {
-            parts.push_back(cpy.substr(pos, plus-pos));
-            pos = plus+1;
-        }
-    }
-    int degree;
-    for (auto s : parts) {
-        if (s.size() <= 0)
-            continue;
-        degree = 0;
-        pos = s.find('^');
-        if (pos >= 0)
-            degree = atoi(s.substr(pos+1).data());
-        pos = s.find('z');
-        if (pos >= 0) {
-            if (degree <= 0)
-                degree++;
-            if (pos > 0)
-                set(FComplex{s.substr(0, pos)}, degree);
-            else
-                set(1, degree);
-        }
-        else
-            set(FComplex{s}, degree);
-    }
-}
-*/
 
 Polynomial::operator string() {
     return ToString();

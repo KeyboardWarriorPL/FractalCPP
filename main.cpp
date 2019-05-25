@@ -10,7 +10,7 @@
 #include "FrontForm.h"
 
 // Uncomment the line below to switch to googletest build
-#define TESTSBUILD
+// #define TESTSBUILD
 
 #ifndef TESTSBUILD
 // Qt main function

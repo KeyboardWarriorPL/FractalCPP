@@ -135,7 +135,7 @@ public:
         iterSpin->setMinimum(1);
         iterSpin->setMaximum(1000000);
         iterSpin->setSingleStep(10);
-        iterSpin->setValue(1000);
+        iterSpin->setValue(100);
 
         gridLayout->addWidget(iterSpin, 3, 0, 1, 1);
 
