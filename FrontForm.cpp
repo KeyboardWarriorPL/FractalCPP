@@ -1,5 +1,4 @@
 #include "FrontForm.h"
-#include <iostream>
 
 FrontForm::FrontForm(QMainWindow *parent) : QMainWindow(parent) {
     form.setupUi(this);
@@ -16,7 +15,7 @@ void FrontForm::drawFractal() {
     delete image;
     image = new QImage{form.graphicsView->width(), form.graphicsView->height(), QImage::Format_RGB32};
     jgen->rescale(form.zoomSpin->value());
-    jgen->set(Polynomial(form.fText->toPlainText().toStdString()), Polynomial(form.gText->toPlainText().toStdString()));
+    jgen->set(Polynomial(form.fText->toPlainText().toStdString().data()), Polynomial(form.gText->toPlainText().toStdString().data()));
     jgen->colormap(form.colorSpin->value(), form.shiftSpin->value());
     FComplex cnst = FComplex{form.rSpin->value(), 2*M_PI*form.fiSlider->value()/form.fiSlider->maximum(), true};
     form.infoLabel->setText(cnst.ToString().data());
@@ -35,8 +34,5 @@ void FrontForm::saveImage() {
 }
 
 void FrontForm::resetPos() {
-    Polynomial test{"1z^2 - 3,3z^3 + 3,56 + 1 + (2+3,3i)z^5 + 1,2z +3z"};
-    cout << test.ToString() << endl;
-    // debug end
     jgen->reposition(0,0,true);
 }

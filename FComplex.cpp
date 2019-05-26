@@ -1,12 +1,13 @@
 #include "FComplex.h"
 
 FComplex::FComplex() : real(0), imag(0) {}
-FComplex::FComplex(string s) : FComplex() {
+FComplex::FComplex(const char* text) : FComplex() {
+    string s{text};
     size_t pos = -1, i = -1;
     if (s[0] == '(')
         s = s.substr(1, s.size()-2);
     pos = s.find('-');
-    if (pos != string::npos)
+    if (pos != string::npos && pos > 0)
         s.insert(pos, "+");
     pos = s.find('+');
     if (pos == string::npos) {
@@ -22,7 +23,7 @@ FComplex::FComplex(string s) : FComplex() {
     }
     else {
         real = atof(s.substr(0,pos).data());
-        imag = atof(s.substr(pos+1).data());
+        imag = atof(s.substr(pos+1,s.size()-pos-2).data());
     }
 }
 FComplex::FComplex(double v) : real(v), imag(0) {}

@@ -16,7 +16,7 @@ Polynomial::Polynomial(const initializer_list<FComplex> a) : size(0) {
         size++;
     }
 }
-Polynomial::Polynomial(const string& s) : Polynomial() {
+Polynomial::Polynomial(const char* s) : Polynomial() {
     fromString(s);
 }
 Polynomial::~Polynomial() {

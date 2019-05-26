@@ -17,7 +17,7 @@ class Polynomial {
     Polynomial(const Polynomial&);
     Polynomial(FComplex*);
     Polynomial(const initializer_list<FComplex>);
-    Polynomial(const string&);
+    Polynomial(const char*);
     ~Polynomial();
 
     Polynomial& push_back(const FComplex&);
