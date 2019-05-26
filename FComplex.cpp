@@ -2,27 +2,27 @@
 
 FComplex::FComplex() : real(0), imag(0) {}
 FComplex::FComplex(string s) : FComplex() {
-    int pos = -1, i = -1;
+    size_t pos = -1, i = -1;
     if (s[0] == '(')
         s = s.substr(1, s.size()-2);
     pos = s.find('-');
-    if (pos >= 0)
+    if (pos != string::npos)
         s.insert(pos, "+");
     pos = s.find('+');
-    if (pos < 0) {
+    if (pos == string::npos) {
         i = s.find('i');
-        if (i < 0)
+        if (i == string::npos)
             real = atof(s.data());
         else {
             if (s.size() == 1)
                 imag = 1;
             else
-                imag = atof(s.substr(0, s.size()-1).data());
+                imag = atof(s.substr(0, s.size()-2).data());
         }
     }
     else {
         real = atof(s.substr(0,pos).data());
-        imag = atof(s.substr(pos+1, s.size()-2-pos).data());
+        imag = atof(s.substr(pos+1).data());
     }
 }
 FComplex::FComplex(double v) : real(v), imag(0) {}

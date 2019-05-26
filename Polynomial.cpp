@@ -1,7 +1,6 @@
 #include "Polynomial.h"
-#include <iostream>
 
-Polynomial::Polynomial() : factors(nullptr), size(0) {}
+Polynomial::Polynomial() : size(0), factors(nullptr) {}
 Polynomial::Polynomial(const Polynomial& p) : Polynomial() {
     size = p.size;
     factors = new FComplex[size];
@@ -157,23 +156,34 @@ string Polynomial::ToString() const {
     return s;
 }
 void Polynomial::fromString(const string& src) {
-    string cpy;
-    cpy.reserve(src.size());
+    string prep;
+    prep.reserve(src.size());
     for (auto c : src) {
         if (c == 'x')
-            cpy.push_back('z');
+            prep.push_back('z');
         else if (c == '-') {
-            cpy.push_back('+');
-            cpy.push_back('-');
+            prep.push_back('+');
+            prep.push_back('-');
         }
         else if (c != ' ')
-            cpy.push_back(c);
+            prep.push_back(c);
     }
-    regex rgx{"[0-9.]*z[^][0-9]+"};
+    regex rgx[5] = {regex("[(]{1}([0-9,.i+-])*[)]{1}z[0-9^]+"), regex("[(]{1}([0-9,.i+-])*[)]{1}z"), regex("([0-9,.-])*z[0-9^]+"), regex("([0-9,.-])*z"), regex("[0-9,.-]+")};
     smatch mch;
-    regex_search(cpy, mch, rgx);
-    for (auto z : mch) {
-        cout << z << endl;
+    size_t zpos = 0, d;
+    for (size_t i = 0; i < 5; i++) {
+        while (regex_search(prep, mch, rgx[i])) {
+            d = 0;
+            zpos = mch[0].str().find('z');
+            if (zpos != string::npos) {
+                d = 1;
+                if (zpos < mch[0].length()-2)
+                    d = atoi(mch[0].str().substr(zpos+2).data());
+            }
+            set(FComplex{mch[0].str().substr(0, zpos)}, d);
+            prep = mch.prefix();
+            prep.append(mch.suffix());
+        }
     }
 }
 

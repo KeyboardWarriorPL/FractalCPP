@@ -1,4 +1,5 @@
 #include "FrontForm.h"
+#include <iostream>
 
 FrontForm::FrontForm(QMainWindow *parent) : QMainWindow(parent) {
     form.setupUi(this);
@@ -34,5 +35,8 @@ void FrontForm::saveImage() {
 }
 
 void FrontForm::resetPos() {
+    Polynomial test{"1z^2 - 3,3z^3 + 3,56 + 1 + (2+3,3i)z^5 + 1,2z +3z"};
+    cout << test.ToString() << endl;
+    // debug end
     jgen->reposition(0,0,true);
 }
