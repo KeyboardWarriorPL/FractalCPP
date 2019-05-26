@@ -11,7 +11,7 @@ class FComplex {
 
     public:
     FComplex();
-    FComplex(const char*);
+    explicit FComplex(const char*);
     FComplex(double);
     FComplex(double, double, bool euler=false);
     FComplex(const FComplex&);
@@ -25,6 +25,8 @@ class FComplex {
     double Fi() const;
     double R() const;
 
+    bool operator==(const FComplex&);
+    bool operator!=(const FComplex&);
     FComplex& operator=(const FComplex&);
 
     FComplex& operator+=(const FComplex&);

@@ -140,6 +140,31 @@ Polynomial& Polynomial::operator=(const Polynomial& p) {
     return *this;
 }
 
+bool Polynomial::operator==(const Polynomial& p) {
+    size_t lower = size;
+    if (p.size > size) {
+        for (size_t i = size; i < p.size; i++) {
+            if (p.factors[i] != 0)
+                return false;
+        }
+    }
+    else if (size > p.size) {
+        lower = p.size;
+        for (size_t i = p.size; i < size; i++) {
+            if (factors[i] != 0)
+                return false;
+        }
+    }
+    for (size_t i = 0; i < lower; i++) {
+        if (factors[i] != p.factors[i])
+            return false;
+    }
+    return true;
+}
+bool Polynomial::operator!=(const Polynomial& p) {
+    return !(*this == p);
+}
+
 string Polynomial::ToString() const {
     if (size <= 0)
         return "";
@@ -180,7 +205,7 @@ void Polynomial::fromString(const string& src) {
                 if (zpos < mch[0].length()-2)
                     d = atoi(mch[0].str().substr(zpos+2).data());
             }
-            set(FComplex{mch[0].str().substr(0, zpos)}, d);
+            set(FComplex{mch[0].str().substr(0, zpos).data()}, d);
             prep = mch.prefix();
             prep.append(mch.suffix());
         }

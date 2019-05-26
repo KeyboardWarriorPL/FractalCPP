@@ -17,7 +17,7 @@ class Polynomial {
     Polynomial(const Polynomial&);
     Polynomial(FComplex*);
     Polynomial(const initializer_list<FComplex>);
-    Polynomial(const char*);
+    explicit Polynomial(const char*);
     ~Polynomial();
 
     Polynomial& push_back(const FComplex&);
@@ -40,6 +40,8 @@ class Polynomial {
     Polynomial operator-(const FComplex&) const;
 
     Polynomial& operator=(const Polynomial&);
+    bool operator==(const Polynomial&);
+    bool operator!=(const Polynomial&);
 
     string ToString() const;
     operator string();

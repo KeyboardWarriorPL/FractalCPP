@@ -64,6 +64,13 @@ double FComplex::R() const {
     return sqrt(pow(real, 2) + pow(imag, 2));
 }
 
+bool FComplex::operator==(const FComplex& z) {
+    return z.real == real && z.imag == imag;
+}
+bool FComplex::operator!=(const FComplex& z) {
+    return !(*this == z);
+}
+
 FComplex& FComplex::operator=(const FComplex& z) {
     real = z.real;
     imag = z.imag;
