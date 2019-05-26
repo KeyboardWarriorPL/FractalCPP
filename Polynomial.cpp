@@ -1,56 +1,77 @@
 #include "Polynomial.h"
 #include <iostream>
 
-Polynomial::Polynomial() : factors(new vector<FComplex>{}) {}
+Polynomial::Polynomial() : factors(nullptr), size(0) {}
 Polynomial::Polynomial(const Polynomial& p) : Polynomial() {
-    factors->reserve(p.factors->size());
-    for (auto i : *p.factors)
-        factors->push_back(i);
+    size = p.size;
+    factors = new FComplex[size];
+    for (size_t i = 0; i < size; i++) {
+        factors[i] = FComplex{p.factors[i]};
+    }
 }
-Polynomial::Polynomial(vector<FComplex> *v) : factors(v) {}
-Polynomial::Polynomial(const initializer_list<FComplex> a) : factors(new vector<FComplex>{}) {
-    factors->reserve(a.size());
-    for (auto i : a)
-        factors->push_back(i);
+Polynomial::Polynomial(FComplex *v) : factors(v) {}
+Polynomial::Polynomial(const initializer_list<FComplex> a) : size(0) {
+    factors = new FComplex[a.size()];
+    for (auto i : a) {
+        factors[size] = i;
+        size++;
+    }
 }
 Polynomial::Polynomial(const string& s) : Polynomial() {
     fromString(s);
 }
 Polynomial::~Polynomial() {
-    delete [] factors->data();
-    factors->clear();
+    delete [] factors;
 }
 
 Polynomial& Polynomial::push_back(const FComplex& z) {
-    factors->push_back(z);
+    resize(size + 1);
+    factors[size-1] = z;
     return *this;
 }
 void Polynomial::set(const FComplex& z, size_t degree) {
-    if (degree >= factors->size()) {
-        factors->reserve(degree+1);
-        while (degree >= factors->size())
-            factors->push_back({});
+    if (degree >= size)
+        resize(degree + 1);
+    factors[degree] = z;
+}
+FComplex Polynomial::get(size_t degree) const {
+    if (degree >= size)
+        return 0;
+    return factors[degree];
+}
+void Polynomial::resize(size_t nsize) {
+    if (size == nsize)
+        return;
+    FComplex *old = factors;
+    factors = new FComplex[nsize];
+    if (nsize > size) {
+        for (size_t i = 0; i < size; i++)
+            factors[i] = old[i];
+        for (size_t i = size; i < nsize; i++)
+            factors[i] = 0;
     }
-    factors->at(degree) = z;
+    else {
+        for (size_t i = 0; i < nsize; i++)
+            factors[i] = old[i];
+    }
+    size = nsize;
+    delete [] old;
 }
 
 FComplex Polynomial::calc(const FComplex& x) const {
     FComplex sum = 0;
-    for (int i = 0; i < factors->size(); i++) {
-        sum += factors->at(i) * x.power(i);
-    }
+    for (size_t i = 0; i < size; i++)
+        sum += factors[i] * x.power(i);
     return sum;
 }
 FComplex Polynomial::operator()(const FComplex& x) const {
     return calc(x);
 }
 Polynomial& Polynomial::operator+=(const Polynomial& p) {
-    for (int i = 0; i < p.factors->size(); i++) {
-        if (factors->size() > i)
-            factors->at(i) += p.factors->at(i);
-        else
-            factors->push_back(p.factors->at(i));
-    }
+    if (size < p.size)
+        resize(p.size);
+    for (size_t i = 0; i < p.size; i++)
+        factors[i] += p.factors[i];
     return *this;
 }
 Polynomial& Polynomial::operator-=(const Polynomial& p) {
@@ -58,12 +79,10 @@ Polynomial& Polynomial::operator-=(const Polynomial& p) {
 }
 Polynomial Polynomial::operator+(const Polynomial& p) const {
     Polynomial sum{*this};
-    for (int i = 0; i < p.factors->size(); i++) {
-        if (sum.factors->size() > i)
-            sum.factors->at(i) += p.factors->at(i);
-        else
-            sum.factors->push_back(p.factors->at(i));
-    }
+    if (sum.size < p.size)
+        sum.resize(p.size);
+    for (size_t i = 0; i < p.size; i++)
+        sum.factors[i] += p.factors[i];
     return sum;
 }
 Polynomial Polynomial::operator-(const Polynomial& p) const {
@@ -71,37 +90,42 @@ Polynomial Polynomial::operator-(const Polynomial& p) const {
 }
 
 Polynomial& Polynomial::operator*=(const FComplex& v) {
-    for (int i = 0; i < factors->size(); i++) {
-        factors->at(i) *= v;
-    }
+    for (size_t i = 0; i < size; i++)
+        factors[i] *= v;
     return *this;
 }
 Polynomial& Polynomial::operator+=(const FComplex& v) {
-    if (factors->size() > 0)
-        factors->at(0) += v;
-    else
-        factors->push_back(v);
+    if (size > 0)
+        factors[0] += v;
+    else {
+        resize(1);
+        factors[0] = v;
+    }
     return *this;
 }
 Polynomial& Polynomial::operator-=(const FComplex& v) {
-    if (factors->size() > 0)
-        factors->at(0) -= v;
-    else
-        factors->push_back(v*(-1));
+    if (size > 0)
+        factors[0] -= v;
+    else {
+        resize(1);
+        factors[0] = v*(-1);
+    }
     return *this;
 }
 Polynomial Polynomial::operator*(const FComplex& v) const {
     Polynomial mul{*this};
-    for (int i = 0; i < mul.factors->size(); i++)
-        mul.factors->at(i) *= v;
+    for (size_t i = 0; i < mul.size; i++)
+        mul.factors[i] *= v;
     return mul;
 }
 Polynomial Polynomial::operator+(const FComplex& v) const {
     Polynomial sum{*this};
-    if (sum.factors->size() > 0)
-        sum.factors->at(0) += v;
-    else
-        sum.factors->push_back(v);
+    if (sum.size > 0)
+        sum.factors[0] += v;
+    else {
+        sum.resize(1);
+        sum.factors[0] = v;
+    }
     return sum;
 }
 Polynomial Polynomial::operator-(const FComplex& v) const {
@@ -109,27 +133,27 @@ Polynomial Polynomial::operator-(const FComplex& v) const {
 }
 
 Polynomial& Polynomial::operator=(const Polynomial& p) {
-    delete factors;
-    factors = new vector<FComplex>;
-    factors->reserve(p.factors->size());
-    for (auto i : *p.factors)
-        factors->push_back(i);
+    if (&p == this)
+        return *this;
+    resize(p.size);
+    for (size_t i = 0; i < size; i++)
+        factors[i] = p.factors[i];
     return *this;
 }
 
 string Polynomial::ToString() const {
-    if (factors->empty())
+    if (size <= 0)
         return "";
     string s;
-    for (int i = factors->size()-1; i > 0; i--) {
-        if (factors->at(i).R()==0)
+    for (int i = size-1; i > 0; i--) {
+        if (factors[i].R()==0)
             continue;
-        s.append(factors->at(i).ToString());
+        s.append(factors[i].ToString());
         s.append("z^");
         s.append(to_string(i));
         s.append(" + ");
     }
-    s.append(factors->at(0).ToString());
+    s.append(factors[0].ToString());
     return s;
 }
 void Polynomial::fromString(const string& src) {
@@ -157,9 +181,9 @@ Polynomial::operator string() {
     return ToString();
 }
 
-vector<FComplex>::iterator Polynomial::begin() {
-    return factors->begin();
+FComplex* Polynomial::begin() {
+    return factors;
 }
-vector<FComplex>::iterator Polynomial::end() {
-    return factors->end();
+FComplex* Polynomial::end() {
+    return factors+size;
 }

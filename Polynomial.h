@@ -1,6 +1,5 @@
 #pragma once
 #include "FComplex.h"
-#include <vector>
 #include <string>
 #include <regex>
 
@@ -8,20 +7,23 @@ using namespace std;
 
 /// Polynomial implementation with basic from string conversion
 class Polynomial {
-    vector<FComplex> *factors;
+    size_t size;
+    FComplex *factors;
 
     void fromString(const string&);
 
     public:
     Polynomial();
     Polynomial(const Polynomial&);
-    Polynomial(vector<FComplex>*);
+    Polynomial(FComplex*);
     Polynomial(const initializer_list<FComplex>);
     Polynomial(const string&);
     ~Polynomial();
 
     Polynomial& push_back(const FComplex&);
     void set(const FComplex&, size_t degree);
+    FComplex get(size_t degree) const;
+    void resize(size_t nsize);
 
     FComplex calc(const FComplex&) const;
     FComplex operator()(const FComplex&) const;
@@ -42,6 +44,6 @@ class Polynomial {
     string ToString() const;
     operator string();
 
-    vector<FComplex>::iterator begin();
-    vector<FComplex>::iterator end();
+    FComplex* begin();
+    FComplex* end();
 };
