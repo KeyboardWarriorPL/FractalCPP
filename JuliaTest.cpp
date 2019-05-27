@@ -1,5 +1,5 @@
 #ifdef TESTSBUILD
-#include <gtest/gtest.h>
 #include "Julia.h"
+#include <gtest/gtest.h>
 
 #endif

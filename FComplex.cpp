@@ -34,10 +34,6 @@ FComplex::FComplex(const FComplex& z) {
     real = z.Real();
     imag = z.Imag();
 }
-FComplex::FComplex(const complex<double>& z) {
-    real = z.real();
-    imag = z.imag();
-}
 
 FComplex& FComplex::set(double r, double i, bool euler) {
     if (euler) {

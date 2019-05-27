@@ -1,7 +1,6 @@
 #pragma once
 #include <math.h>
 #include <string>
-#include <complex>
 
 using namespace std;
 
@@ -15,7 +14,6 @@ class FComplex {
     FComplex(double);
     FComplex(double, double, bool euler=false);
     FComplex(const FComplex&);
-    FComplex(const complex<double>&);
     ~FComplex() = default;
 
     FComplex& set(double, double, bool euler=false);
