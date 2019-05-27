@@ -120,10 +120,10 @@ FComplex FComplex::operator/(const FComplex& z) const {
 }
 
 FComplex FComplex::power(const FComplex& z) const {
-    if (R() == 0)
-        return 0;
     if (z.R() == 0)
         return 1;
+    if (R() == 0)
+        return 0;
     FComplex pwr;
     pwr.set( exp(z.real*log(R()) - Fi()*z.imag), z.imag*log(R()) + Fi()*z.real, true);
     return pwr;

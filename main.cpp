@@ -25,6 +25,9 @@ int main(int argc, char **argv) {
     return app.exec();
 }
 #else
+#include "FComplexTest.h"
+#include "PolynomialTest.h"
+
 // googletest main function
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
