@@ -68,8 +68,8 @@ bool FComplex::operator!=(const FComplex& z) {
 }
 
 FComplex& FComplex::operator=(const FComplex& z) {
-    real = z.real;
-    imag = z.imag;
+    real = z.Real();
+    imag = z.Imag();
     return *this;
 }
 
@@ -84,38 +84,38 @@ FComplex& FComplex::operator-=(const FComplex& z) {
     return *this;
 }
 FComplex& FComplex::operator*=(const FComplex& z) {
-    real = real * z.real - imag * z.imag;
+    double newreal;
+    newreal = real * z.real - imag * z.imag;
     imag = real * z.imag + z.real * imag;
+    real = newreal;
     return *this;
 }
 FComplex& FComplex::operator/=(const FComplex& z) {
-    real = (real * z.real + imag * z.imag) / pow(z.R(), 2);
-    imag = (imag * z.real - real * z.imag) / pow(z.R(), 2);
+    double rsq = pow(z.real, 2.0) + pow(z.imag, 2.0), newreal;
+    newreal = (real * z.real + imag * z.imag) / rsq;
+    imag = (imag * z.real - real * z.imag) / rsq;
+    real = newreal;
     return *this;
 }
 
 FComplex FComplex::operator+(const FComplex& z) const {
     FComplex sum{*this};
-    sum.real += z.real;
-    sum.imag += z.imag;
+    sum += z;
     return sum;
 }
 FComplex FComplex::operator-(const FComplex& z) const {
     FComplex sum{*this};
-    sum.real -= z.real;
-    sum.imag -= z.imag;
+    sum -= z;
     return sum;
 }
 FComplex FComplex::operator*(const FComplex& z) const {
     FComplex mul{*this};
-    mul.real = real * z.real - imag * z.imag;
-    mul.imag = real * z.imag + z.real * imag;
+    mul *= z;
     return mul;
 }
 FComplex FComplex::operator/(const FComplex& z) const {
     FComplex mul{*this};
-    mul.real = (real * z.real + imag * z.imag) / pow(z.R(), 2);
-    mul.imag = (imag * z.real - real * z.imag) / pow(z.R(), 2);
+    mul /= z;
     return mul;
 }
 
@@ -125,7 +125,10 @@ FComplex FComplex::power(const FComplex& z) const {
     if (R() == 0)
         return 0;
     FComplex pwr;
-    pwr.set( exp(z.real*log(R()) - Fi()*z.imag), z.imag*log(R()) + Fi()*z.real, true);
+    pwr.set(exp(z.real*log(R()) - Fi()*z.imag), z.imag*log(R()) + Fi()*z.real, true);
+    // apply sign correction if negative
+    if (real < 0)
+        pwr *= pow(-1.0, z.R());
     return pwr;
 }
 

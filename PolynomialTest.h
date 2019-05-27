@@ -1,4 +1,4 @@
-#ifndef TESTSBUILD
+#ifdef TESTSBUILD
 #include "Polynomial.h"
 #include <gtest/gtest.h>
 
@@ -6,6 +6,7 @@ TEST(PolyCalc, ShouldCalcPoly) {
     Polynomial f{1.0, 1.0, 1.0};
     EXPECT_TRUE(f(0.0) == 1.0) << f(0.0).ToString();
     EXPECT_TRUE(f(1.0) == 3.0) << f(1.0).ToString();
+    EXPECT_TRUE(f(2.0) == 7.0) << f(2.0).ToString();
     EXPECT_TRUE(f(-4.0) == 13.0) << f(-4.0).ToString();
 }
 

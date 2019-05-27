@@ -5,7 +5,7 @@
 
 using namespace std;
 
-/// Polynomial implementation with basic from string conversion
+/// Polynomial implementation with basic string parsing
 class Polynomial {
     size_t size;
     FComplex *factors;
