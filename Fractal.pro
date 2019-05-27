@@ -17,7 +17,7 @@ HEADERS += FComplex.h Polynomial.h Julia.h CustomGraphics.h CustomSpinner.h Fron
 FORMS += front.ui
 SOURCES += main.cpp FComplex.cpp Polynomial.cpp Julia.cpp FComplexTest.cpp PolynomialTest.cpp CustomGraphics.cpp CustomSpinner.cpp FrontForm.cpp
 
-LIBS += -L/usr/local/lib
+LIBS += -L/usr/local/lib -lgtest
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
