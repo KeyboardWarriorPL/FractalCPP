@@ -193,19 +193,24 @@ void Polynomial::fromString(const string& src) {
         else if (c != ' ')
             prep.push_back(c);
     }
-    regex rgx[5] = {regex("[(]{1}([0-9,.i+-])*[)]{1}z[0-9^]+"), regex("[(]{1}([0-9,.i+-])*[)]{1}z"), regex("([0-9,.-])*z[0-9^]+"), regex("([0-9,.-])*z"), regex("[0-9,.-]+")};
+    regex rgx[6] = {regex("[(]{1}([0-9,.i+-])*[)]{1}z[0-9^]+"), regex("[(]{1}([0-9,.i+-])*[)]{1}z"), regex("[(]{1}([0-9,.i+-])*[)]{1}"), regex("([0-9,.-])*z[0-9^]+"), regex("([0-9,.-])*z"), regex("[0-9,.-]+")};
     smatch mch;
     size_t zpos = 0, d;
-    for (size_t i = 0; i < 5; i++) {
+    for (size_t i = 0; i < 6; i++) {
         while (regex_search(prep, mch, rgx[i])) {
             d = 0;
             zpos = mch[0].str().find('z');
             if (zpos != string::npos) {
                 d = 1;
-                if (zpos < mch[0].length()-2)
+                if (static_cast<int>(zpos) < mch[0].length()-2)
                     d = atoi(mch[0].str().substr(zpos+2).data());
+                if (zpos > 0)
+                    set(FComplex{mch[0].str().substr(0, zpos).data()}, d);
+                else
+                    set(1.0, d);
             }
-            set(FComplex{mch[0].str().substr(0, zpos).data()}, d);
+            else
+                set(FComplex{mch[0].str().data()}, d);
             prep = mch.prefix();
             prep.append(mch.suffix());
         }

@@ -7,7 +7,7 @@ FComplex::FComplex(const char* text) : FComplex() {
     if (s[0] == '(')
         s = s.substr(1, s.size()-2);
     pos = s.find('-');
-    if (pos != string::npos && pos > 0)
+    if (pos != string::npos && s.find('+') == string::npos && pos > 0)
         s.insert(pos, "+");
     pos = s.find('+');
     if (pos == string::npos) {

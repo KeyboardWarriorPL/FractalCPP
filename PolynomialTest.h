@@ -4,10 +4,15 @@
 
 TEST(PolyCalc, ShouldCalcPoly) {
     Polynomial f{1.0, 1.0, 1.0};
-    EXPECT_TRUE(f(0.0) == 1.0) << f(0.0).ToString();
-    EXPECT_TRUE(f(1.0) == 3.0) << f(1.0).ToString();
-    EXPECT_TRUE(f(2.0) == 7.0) << f(2.0).ToString();
-    EXPECT_TRUE(f(-4.0) == 13.0) << f(-4.0).ToString();
+    FComplex res;
+    res = f(0.0);
+    EXPECT_TRUE(res == 1.0) << res.ToString();
+    res = f(1.0);
+    EXPECT_TRUE(res == 3.0) << res.ToString();
+    res = f(2.0);
+    EXPECT_TRUE(res == 7.0) << res.ToString();
+    res = f(-4.0);
+    EXPECT_TRUE(res.Real() >= 13.0-1e-14 && res.Real() <= 13.0+1e-14) << res.ToString();
 }
 
 TEST(PolyAdd, ShouldAddPoly) {
@@ -31,8 +36,7 @@ TEST(PolyMultiply, ShouldMultiplyPoly) {
 }
 
 TEST(PolyFromStr, ShouldParsePoly) {
-    Polynomial g("2,5z^2 + z + (5-3i)z^3 - 2,2");
-    // Polynomial g("2.5z^2 + z + (5-3i)z^3 - 2.2"); // US version
+    Polynomial g("2.5z^2 + z + (5-3i)z^3 - 2.2");
     EXPECT_TRUE(g == Polynomial({-2.2, 1.0, 2.5, FComplex(5,-3)})) << g.ToString();
 }
 #endif

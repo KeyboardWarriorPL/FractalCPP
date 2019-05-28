@@ -31,15 +31,16 @@ TEST(ComplexMultiply, ShouldMultiplyComplex) {
 TEST(ComplexPower, ShouldPowerComplex) {
     FComplex a{-2,0}, b;
     b = a.power(1);
-    EXPECT_TRUE(b == -2) << b.ToString() << " fi" << a.Fi();
+    EXPECT_TRUE(b == -2) << b.ToString();
     b = a.power(2);
     EXPECT_TRUE(b == 4) << b.ToString();
     b = a.power(3);
-    EXPECT_TRUE(b == -8) << b.ToString();
+    EXPECT_TRUE(b.Real() <= (1e-14)-8 && b.Real() >= (-1e-14)-8) << b.ToString();
 }
 
 TEST(ComplexFromStr, ShouldParseStrComplex) {
-    FComplex a("2.25-3.1i");
+    FComplex a("2.25-3.1i"), b("(+-9.1i)");
     EXPECT_TRUE(a == FComplex(2.25, -3.1)) << a.ToString();
+    EXPECT_TRUE(b == FComplex(0, -9.1)) << b.ToString();
 }
 #endif
