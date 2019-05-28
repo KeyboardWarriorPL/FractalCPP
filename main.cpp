@@ -9,7 +9,7 @@
 
 #if __has_include(<gtest/gtest.h>)
 // Uncomment the line below to switch to googletest build
-#define TESTSBUILD
+// #define TESTSBUILD
 #include <gtest/gtest.h>
 #else
 #warning "gtest not found"
