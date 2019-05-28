@@ -183,7 +183,7 @@ public:
         shiftSpin = new QSpinBox(centralwidget);
         shiftSpin->setObjectName(QString::fromUtf8("shiftSpin"));
         shiftSpin->setMinimum(1);
-        shiftSpin->setMaximum(3);
+        shiftSpin->setMaximum(6);
         shiftSpin->setValue(1);
 
         horizontalLayout->addWidget(shiftSpin);

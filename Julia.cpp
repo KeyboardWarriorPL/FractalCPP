@@ -4,7 +4,7 @@ const double Julia::XRANGE = 4.0, Julia::YRANGE = 4.0;
 
 Julia::Julia() : Julia(1) {}
 Julia::Julia(double zoom) : Julia(zoom, Polynomial(), Polynomial({1})) {}
-Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), offset{0, 0}, cmap(0xffffff), mapshift(1), f(numerator), g(denominator) {}
+Julia::Julia(double zoom, const Polynomial& numerator, const Polynomial& denominator) : scale(zoom), offset{0, 0}, cmap(0xffffff), mapshift(0), f(numerator), g(denominator) {}
 
 string Julia::ToString() const {
     string s = f.ToString();
@@ -18,7 +18,7 @@ void Julia::set(const Polynomial& numerator, const Polynomial& denominator) {
 }
 void Julia::colormap(int c, int s) {
     cmap = c;
-    mapshift = s;
+    mapshift = s-1;
 }
 void Julia::reposition(double x, double y, bool set) {
     if (set) {
@@ -46,29 +46,21 @@ int Julia::process(int iters, const FComplex& start, const FComplex& c) const {
 int Julia::getColor(double progress) const {
     if (progress >= 1)
         return 0;
-    return unshiftMap(reshiftMap(cmap) * exp(-progress));
+    return reshiftMap(reshiftMap(cmap, mapshift) * exp(-progress), 6-mapshift);
 }
-int Julia::reshiftMap(int map) const {
-    int shift = mapshift;
-    while (shift > 1) {
-        int r,g,b;
-        b = map%256;
-        g = (map%(256*256) - b) >> 8;
-        r = (map - g - b) >> 16;
-        map = (g << 16) + (b << 8) + r;
-        shift--;
-    }
-    return map;
-}
-int Julia::unshiftMap(int map) const {
-    int shift = 1;
-    while (shift < mapshift) {
-        int r,g,b;
-        b = map%256;
-        g = (map%(256*256) - b) >> 8;
-        r = (map - g - b) >> 16;
-        map = (b << 16) + (r << 8) + g;
-        shift++;
+int Julia::reshiftMap(int map, int shift) const {
+    if (shift % 6 == 0)
+        return map;
+    int tmp[6];
+    tmp[0] = map % 16;
+    for (int i = 1; i < 6; i++)
+        tmp[i] = (map >> (4*i)) % 16;
+    map = 0;
+    for (int i = 0; i < 6; i++) {
+        if ((i+shift) % 6 != 0)
+            map += tmp[i] << (4 * ((i+shift) % 6));
+        else
+            map += tmp[i];
     }
     return map;
 }

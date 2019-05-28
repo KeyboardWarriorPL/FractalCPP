@@ -13,8 +13,7 @@ class Julia {
 
     int process(int, const FComplex&, const FComplex&) const;
     int getColor(double) const;
-    int reshiftMap(int) const;
-    int unshiftMap(int) const;
+    int reshiftMap(int, int) const;
 
     public:
     Julia();
