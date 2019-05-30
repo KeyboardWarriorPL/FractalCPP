@@ -2,7 +2,8 @@
 <p>
 qmake (OPTIONAL)<br>
 make -OR- make install<br>
-to build tests uncomment marked line in main.cpp
+to build tests uncomment marked line in main.cpp<br>
+Compiled program is stored in bin/ folder
 </p>
 <h1>How to use:</h1>
 <p>
@@ -11,7 +12,7 @@ to build tests uncomment marked line in main.cpp
 <li>Generate -- generate fractal image with settings provided below</li>
 <li>Iterations -- recurrent calls for rational fractal resulting function</li>
 <li>Colormap -- hex represantation of brightest color with rotation parameter</li>
-<li>Zoom and position -- program allows to pan the image but does not update it live, so after repositioning regeneration is required</li>
+<li>Zoom and position -- program allows to pan the image but does not update it real-time, so after repositioning regeneration is required</li>
 <li>Constant -- radius and angle of complex constant number used to generate different julia sets</li>
 <li>Upper text field -- numerator complex polynomial (variable z)</li>
 <li>Lower text field -- denominator complex polynomial (variable z)</li>
